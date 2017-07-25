@@ -7,19 +7,28 @@ using System.Diagnostics;
 
 namespace Rocketbox
 {
+    /// <summary>
+    /// Defines the structure of a command to be used with the Invoker.
+    /// </summary>
     internal interface RbCommand
     {
+        // response string will be displayed in the text below the input box before the user sends the command
         string GetResponse(string arguments);
+
+        // runs the command - the boolean signals to the invoker whether Rocketbox should be closed or not
         bool Execute(string arguments);
     }
 
+    /// <summary>
+    /// Dummy command for blank or whitespace-only input.
+    /// </summary>
     internal class NullCommand : RbCommand
     {
         internal NullCommand() { }
 
         public string GetResponse(string arguments)
         {
-            return "Unknown command.";
+            return "Invalid command.";
         }
 
         public bool Execute(string arguments)
@@ -29,21 +38,27 @@ namespace Rocketbox
         }
     }
 
+    /// <summary>
+    /// Command for launching search engine queries.
+    /// </summary>
     internal class SearchCommand : RbCommand
     {
         private RbSearchEngine _engine;
 
+        // the search engine is determined by the Invoker and passed here
         internal SearchCommand(RbSearchEngine engine)
         {
             _engine = engine;
         }
 
+        // will print the search engine's full name and the query to be sent
         public string GetResponse(string arguments)
         {
             string response = String.Format("{0}: \"{1}\"", _engine.Name, arguments);
             return response;
         }
 
+        // launches the query through a default browser
         public bool Execute(string arguments)
         {
             arguments = arguments.Replace("#", "%23"); // hashtags
@@ -56,6 +71,9 @@ namespace Rocketbox
         }
     }
 
+    /// <summary>
+    /// Command to launch an application as if it were from a normal command line.
+    /// </summary>
     internal class ShellCommand : RbCommand
     {
         private string _command;
