@@ -26,6 +26,9 @@ namespace Rocketbox
             RbData.LoadData();
 
             responseText.Text = string.Empty;
+            textConsole.Text = string.Empty;
+
+            Invoker.Invoke(textConsole.Text);
 
             this.Deactivated += (sender, e) => this.Close();
             this.KeyDown += KeyPress;
