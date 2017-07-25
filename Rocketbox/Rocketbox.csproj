@@ -57,7 +57,7 @@
     <Compile Include="Commands.cs" />
     <Compile Include="RbData.cs" />
     <Compile Include="RbUtility.cs" />
-    <Compile Include="ResponseInvoker.cs" />
+    <Compile Include="Invokers.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

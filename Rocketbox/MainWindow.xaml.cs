@@ -25,6 +25,8 @@ namespace Rocketbox
             InitializeComponent();
             RbData.LoadData();
 
+            responseText.Text = string.Empty;
+
             this.Deactivated += (sender, e) => this.Close();
             this.KeyDown += KeyPress;
             this.Loaded += (sender, e) => textConsole.Focus();
@@ -44,6 +46,12 @@ namespace Rocketbox
             {
                 case Key.Escape:
                     this.Close();
+                    break;
+                case Key.Enter:
+                    if(ActionInvoker.Execute(textConsole.Text))
+                    {
+                        this.Close();
+                    }
                     break;
             }
         }
