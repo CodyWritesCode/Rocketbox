@@ -57,6 +57,9 @@ namespace Rocketbox
         }
     }
 
+    /// <summary>
+    /// Bundles information for a certain search engine
+    /// </summary>
     internal struct RbSearchEngine
     {
         internal string Name { get; private set; }
