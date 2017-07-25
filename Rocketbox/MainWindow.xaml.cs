@@ -24,6 +24,8 @@ namespace Rocketbox
         {
             InitializeComponent();
 
+            textConsole.Text = string.Empty;
+
             this.Deactivated += (sender, e) => this.Close();
             this.KeyDown += KeyPress;
             this.Loaded += (sender, e) => textConsole.Focus();
