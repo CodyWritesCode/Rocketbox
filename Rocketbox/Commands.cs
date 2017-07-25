@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Rocketbox
 {
     internal interface RbCommand
     {
         string GetResponse(string arguments);
-        void Execute(string arguments);
+        bool Execute(string arguments);
     }
 
     internal class NullCommand : RbCommand
@@ -21,9 +22,10 @@ namespace Rocketbox
             return "Unknown command.";
         }
 
-        public void Execute(string arguments)
+        public bool Execute(string arguments)
         {
             // do nothing
+            return false;
         }
     }
 
@@ -42,9 +44,15 @@ namespace Rocketbox
             return response;
         }
 
-        public void Execute(string arguments)
+        public bool Execute(string arguments)
         {
+            arguments = arguments.Replace("#", "%23"); // hashtags
 
+            string url = _engine.SearchUrl + arguments;
+
+            Process.Start(url);
+
+            return true;
         }
     }
 }
