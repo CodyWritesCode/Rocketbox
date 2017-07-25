@@ -23,10 +23,19 @@ namespace Rocketbox
         public MainWindow()
         {
             InitializeComponent();
+            RbData.LoadData();
 
             this.Deactivated += (sender, e) => this.Close();
             this.KeyDown += KeyPress;
             this.Loaded += (sender, e) => textConsole.Focus();
+
+            textConsole.TextChanged += TextUpdated;
+        }
+
+        private void TextUpdated(object sender, TextChangedEventArgs e)
+        {
+            string response = ResponseInvoker.GetResponse(textConsole.Text);
+            responseText.Text = response;
         }
 
         private void KeyPress(object sender, KeyEventArgs e)
