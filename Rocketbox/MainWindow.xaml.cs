@@ -26,6 +26,7 @@ namespace Rocketbox
 
             this.Deactivated += (sender, e) => this.Close();
             this.KeyDown += KeyPress;
+            this.Loaded += (sender, e) => textConsole.Focus();
         }
 
         private void KeyPress(object sender, KeyEventArgs e)
