@@ -30,7 +30,7 @@ namespace Rocketbox
         internal static void Invoke(string command)
         {
             _currentText = command;
-            _currentCmd = new NullCommand();
+            _currentCmd = new ShellCommand(command);
 
             // first test for search engines
             var matchingSearchEngines = from engine in RbData.SearchEngines
