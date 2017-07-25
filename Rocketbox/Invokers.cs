@@ -6,63 +6,61 @@ using System.Threading.Tasks;
 
 namespace Rocketbox
 {
-    internal static class ResponseInvoker
+    internal static class Invoker
     {
-        internal static string GetResponse(string command)
+        private static string _currentText;
+        private static RbCommand _currentCmd;
+
+        private static string Keyword
         {
-            if(command.Trim() == string.Empty)
+            get
             {
-                return new NullCommand().GetResponse(command);
+                return RbUtility.GetKeyword(_currentText);
             }
-
-            string keyword = RbUtility.GetKeyword(command);
-            string parameters = RbUtility.StripKeyword(command);
-
-            // first test for search engines
-            var matchingSearchEngines = from engine in RbData.SearchEngines
-                                        where engine.Keywords.Contains(keyword)
-                                        select engine;
-
-            if(matchingSearchEngines.Count() != 0)
-            {
-                SearchCommand searchCommand = new SearchCommand(matchingSearchEngines.First());
-                return searchCommand.GetResponse(parameters);
-            }
-
-            return new NullCommand().GetResponse(command);
         }
-    }
 
-    internal static class ActionInvoker
-    {
-        internal static bool Execute(string command)
+        private static string Parameters
         {
-            if(command.Trim() == string.Empty)
+            get
             {
-                // temporary
-                new NullCommand().Execute(command);
-                return false;
+                return RbUtility.StripKeyword(_currentText);
             }
+        }
 
-            // TODO: move duplicate code
-            string keyword = RbUtility.GetKeyword(command);
-            string parameters = RbUtility.StripKeyword(command);
+        internal static void Invoke(string command)
+        {
+            _currentText = command;
+            _currentCmd = new NullCommand();
 
             // first test for search engines
             var matchingSearchEngines = from engine in RbData.SearchEngines
-                                        where engine.Keywords.Contains(keyword)
+                                        where engine.Keywords.Contains(Keyword)
                                         select engine;
 
             if (matchingSearchEngines.Count() != 0)
             {
-                SearchCommand searchCommand = new SearchCommand(matchingSearchEngines.First());
-                if(searchCommand.Execute(parameters))
-                {
-                    return true;
-                }
+                _currentCmd = new SearchCommand(matchingSearchEngines.First());
+            }
+        }
+
+        internal static string GetResponse()
+        {
+            if(_currentText.Trim() == string.Empty)
+            {
+                return new NullCommand().GetResponse(_currentText);
             }
 
-            return false;
+            return _currentCmd.GetResponse(Parameters);
+        }
+
+        internal static bool Execute()
+        {
+            if(_currentText.Trim() == string.Empty)
+            {
+                return false;
+            }
+
+            return _currentCmd.Execute(Parameters);
         }
     }
 }

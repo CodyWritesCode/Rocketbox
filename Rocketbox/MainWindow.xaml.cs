@@ -36,8 +36,8 @@ namespace Rocketbox
 
         private void TextUpdated(object sender, TextChangedEventArgs e)
         {
-            string response = ResponseInvoker.GetResponse(textConsole.Text);
-            responseText.Text = response;
+            Invoker.Invoke(textConsole.Text);
+            responseText.Text = Invoker.GetResponse();
         }
 
         private void KeyPress(object sender, KeyEventArgs e)
@@ -48,7 +48,7 @@ namespace Rocketbox
                     this.Close();
                     break;
                 case Key.Enter:
-                    if(ActionInvoker.Execute(textConsole.Text))
+                    if(Invoker.Execute())
                     {
                         this.Close();
                     }
