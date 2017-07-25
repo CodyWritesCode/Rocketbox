@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace Rocketbox
 {
+    /// <summary>
+    /// Handles the determination of what actions to be taken with a user command
+    /// </summary>
     internal static class Invoker
     {
         private static string _currentText;
         private static RbCommand _currentCmd;
 
+        // easy way to access the keyword of the current command
         private static string Keyword
         {
             get
@@ -19,6 +23,7 @@ namespace Rocketbox
             }
         }
 
+        // easy way to access the parameters of the current command
         private static string Parameters
         {
             get
@@ -27,22 +32,26 @@ namespace Rocketbox
             }
         }
 
+        // should be ran on every update before responding/executing
         internal static void Invoke(string command)
         {
-            _currentText = command;
+            // default to a shell command
             _currentCmd = new ShellCommand(command);
+            _currentText = command;
 
-            // first test for search engines
+            // first, test for search engines
             var matchingSearchEngines = from engine in RbData.SearchEngines
                                         where engine.Keywords.Contains(Keyword)
                                         select engine;
 
+            // if a search engine is found, change the command
             if (matchingSearchEngines.Count() != 0)
             {
                 _currentCmd = new SearchCommand(matchingSearchEngines.First());
             }
         }
 
+        // retrieves the string to be indicated below the text box before a command is sent
         internal static string GetResponse()
         {
             if(_currentText.Trim() == string.Empty)
@@ -53,6 +62,7 @@ namespace Rocketbox
             return _currentCmd.GetResponse(Parameters);
         }
 
+        // runs the command
         internal static bool Execute()
         {
             if(_currentText.Trim() == string.Empty)
