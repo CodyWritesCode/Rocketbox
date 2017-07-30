@@ -21,5 +21,10 @@ namespace Rocketbox
             commandParts[0] = string.Empty;
             return string.Join(" ", commandParts).Trim();
         }
+
+        internal static void ThrowConfigError(string information)
+        {
+            throw new Exception("Malformed configuration file: " + information);
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace Rocketbox
 {
     internal enum RbUnitType
     {
+        Null,
         Distance
     }
 }

@@ -12,6 +12,9 @@ namespace Rocketbox
         // Master list of search engines
         internal static List<RbSearchEngine> SearchEngines;
 
+        // Master list of converter units
+        internal static List<RbConversionUnit> ConversionUnits;
+
         private static bool isLoaded = false;
 
         // Must be called by app before doing anything
@@ -47,7 +50,58 @@ namespace Rocketbox
                     }
                     catch(Exception e)
                     {
-                        throw new Exception("Malformed configuration file.");
+                        RbUtility.ThrowConfigError("Search engine configuration");
+                    }
+                }
+
+                // load conversion units from config
+
+                reader = new StreamReader("ConversionUnits.cfg");
+                fileContents = reader.ReadToEnd();
+                reader.Close();
+
+                segments = fileContents.Split(new string[] { ";;" }, StringSplitOptions.RemoveEmptyEntries);
+
+                ConversionUnits = new List<RbConversionUnit>();
+
+                /*  Config format:
+                 *      Centimeters                       Name of unit
+                 *      DIST                              Type of unit (DIST = distance)
+                 *      10                                Multiplier (number of base units comprising this unit)
+                 *      CENTIMETER                        Keyword
+                 *      CENTIMETRE                        Keyword
+                 *      CENTIMETERS                       Keyword
+                 *      CENTIMETRES                       Keyword
+                 *      CM                                Keyword
+                 *      ;;                                Delimeter
+                 * */
+
+                foreach(string segment in segments)
+                {
+                    string[] lines = segment.Trim().Split('\n');
+                    string[] keywords = lines.Skip(3).ToArray();
+
+                    RbUnitType type = RbUnitType.Null;
+
+                    switch(lines[1])
+                    {
+                        case "DIST":
+                            type = RbUnitType.Distance;
+                            break;
+                    }
+
+                    try
+                    {
+                        ConversionUnits.Add(new RbConversionUnit(lines[0], type, Double.Parse(lines[2]), keywords));
+                    }
+                    catch(Exception e)
+                    {
+                        RbUtility.ThrowConfigError("Conversion unit config");
+                    }
+
+                    if (type == RbUnitType.Null)
+                    {
+                        RbUtility.ThrowConfigError("Conversion unit config - invalid type for " + lines[0]);
                     }
                 }
 
@@ -81,12 +135,14 @@ namespace Rocketbox
     internal struct RbConversionUnit
     {
         internal string Name { get; private set; }
+        internal RbUnitType Type { get; private set; }
         internal double Multiplier { get; private set; }
         internal string[] Keywords { get; private set; }
 
-        internal RbConversionUnit(string name, double multiplier, params string[] keywords)
+        internal RbConversionUnit(string name, RbUnitType type, double multiplier, params string[] keywords)
         {
             Name = name;
+            Type = type;
             Multiplier = multiplier;
             Keywords = keywords;
         }
