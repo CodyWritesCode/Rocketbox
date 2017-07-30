@@ -10,6 +10,7 @@ namespace Rocketbox
     {
         Null,
         Distance,
-        Volume
+        Volume,
+        Mass
     }
 }
