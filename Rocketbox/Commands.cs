@@ -54,7 +54,7 @@ namespace Rocketbox
         // will print the search engine's full name and the query to be sent
         public string GetResponse(string arguments)
         {
-            string response = String.Format("{0}: \"{1}\"", _engine.Name, arguments);
+            string response = String.Format("{0}:   {1}", _engine.Name, arguments);
             return response;
         }
 
