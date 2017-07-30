@@ -74,4 +74,21 @@ namespace Rocketbox
             Keywords = keywords;
         }
     }
+
+    /// <summary>
+    /// Unit for the inline converter
+    /// </summary>
+    internal struct RbConversionUnit
+    {
+        internal string Name { get; private set; }
+        internal double Multiplier { get; private set; }
+        internal string[] Keywords { get; private set; }
+
+        internal RbConversionUnit(string name, double multiplier, params string[] keywords)
+        {
+            Name = name;
+            Multiplier = multiplier;
+            Keywords = keywords;
+        }
+    }
 }
