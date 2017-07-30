@@ -94,6 +94,9 @@ namespace Rocketbox
                         case "MASS":
                             type = RbUnitType.Mass;
                             break;
+                        case "DATA":
+                            type = RbUnitType.Data;
+                            break;
                     }
 
                     try

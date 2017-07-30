@@ -11,6 +11,7 @@ namespace Rocketbox
         Null,
         Distance,
         Volume,
-        Mass
+        Mass,
+        Data
     }
 }
