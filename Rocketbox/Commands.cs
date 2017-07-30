@@ -108,6 +108,10 @@ namespace Rocketbox
             {
                 isError = true;
             }
+            else if(_convertFrom.Type != _convertTo.Type)
+            {
+                return "Unit conversion:   Unit type mismatch.";
+            }
 
 
             if(isError)

@@ -88,6 +88,9 @@ namespace Rocketbox
                         case "DIST":
                             type = RbUnitType.Distance;
                             break;
+                        case "VOL":
+                            type = RbUnitType.Volume;
+                            break;
                     }
 
                     try
