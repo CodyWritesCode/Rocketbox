@@ -109,6 +109,25 @@ namespace Rocketbox
                 isLoaded = true;
             }
         }
+
+
+        internal static RbConversionUnit GetConversionUnit(string keyword)
+        {
+            keyword = keyword.ToUpper();
+
+            var results = from unit in ConversionUnits
+                          where unit.Keywords.Contains(keyword)
+                          select unit;
+
+            if(results.Count() > 0)
+            {
+                return results.First();
+            }
+            else
+            {
+                return new RbConversionUnit("null", RbUnitType.Null, 0, "null");
+            }
+        }
     }
 
     /// <summary>
