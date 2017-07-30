@@ -91,6 +91,9 @@ namespace Rocketbox
                         case "VOL":
                             type = RbUnitType.Volume;
                             break;
+                        case "MASS":
+                            type = RbUnitType.Mass;
+                            break;
                     }
 
                     try
