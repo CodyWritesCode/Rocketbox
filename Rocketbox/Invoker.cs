@@ -56,6 +56,7 @@ namespace Rocketbox
                 case "CONVERT":
                 case "CON":
                 case "CV":
+                case "C":
                     _currentCmd = new UnitConversionCommand();
                     break;
             }
