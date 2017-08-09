@@ -12,6 +12,9 @@ namespace Rocketbox
         // Master list of search engines
         internal static List<RbSearchEngine> SearchEngines;
 
+        // Master list of converter units
+        internal static List<RbConversionUnit> ConversionUnits;
+
         private static bool isLoaded = false;
 
         // Must be called by app before doing anything
@@ -47,12 +50,91 @@ namespace Rocketbox
                     }
                     catch(Exception e)
                     {
-                        throw new Exception("Malformed configuration file.");
+                        RbUtility.ThrowConfigError("Search engine configuration");
+                    }
+                }
+
+                // load conversion units from config
+
+                reader = new StreamReader("ConversionUnits.cfg");
+                fileContents = reader.ReadToEnd();
+                reader.Close();
+
+                segments = fileContents.Split(new string[] { ";;" }, StringSplitOptions.RemoveEmptyEntries);
+
+                ConversionUnits = new List<RbConversionUnit>();
+
+                /*  Config format:
+                 *      Centimeters                       Name of unit
+                 *      DIST                              Type of unit (DIST = distance)
+                 *      10                                Multiplier (number of base units comprising this unit)
+                 *      CENTIMETER                        Keyword
+                 *      CENTIMETRE                        Keyword
+                 *      CENTIMETERS                       Keyword
+                 *      CENTIMETRES                       Keyword
+                 *      CM                                Keyword
+                 *      ;;                                Delimeter
+                 * */
+
+                foreach(string segment in segments)
+                {
+                    string[] lines = segment.Trim().Split('\n');
+                    string[] keywords = lines.Skip(3).ToArray();
+
+                    RbUnitType type = RbUnitType.Null;
+
+                    switch(lines[1])
+                    {
+                        case "DIST":
+                            type = RbUnitType.Distance;
+                            break;
+                        case "VOL":
+                            type = RbUnitType.Volume;
+                            break;
+                        case "MASS":
+                            type = RbUnitType.Mass;
+                            break;
+                        case "DATA":
+                            type = RbUnitType.Data;
+                            break;
+                    }
+
+                    try
+                    {
+                        ConversionUnits.Add(new RbConversionUnit(lines[0], type, Double.Parse(lines[2]), keywords));
+                    }
+                    catch(Exception e)
+                    {
+                        RbUtility.ThrowConfigError("Conversion unit config");
+                    }
+
+                    if (type == RbUnitType.Null)
+                    {
+                        RbUtility.ThrowConfigError("Conversion unit config - invalid type for " + lines[0]);
                     }
                 }
 
 
                 isLoaded = true;
+            }
+        }
+
+
+        internal static RbConversionUnit GetConversionUnit(string keyword)
+        {
+            keyword = keyword.ToUpper();
+
+            var results = from unit in ConversionUnits
+                          where unit.Keywords.Contains(keyword)
+                          select unit;
+
+            if(results.Count() > 0)
+            {
+                return results.First();
+            }
+            else
+            {
+                return new RbConversionUnit("null", RbUnitType.Null, 0, "null");
             }
         }
     }
@@ -71,6 +153,25 @@ namespace Rocketbox
             Name = name;
             SearchUrl = searchUrl;
 
+            Keywords = keywords;
+        }
+    }
+
+    /// <summary>
+    /// Unit for the inline converter
+    /// </summary>
+    internal struct RbConversionUnit
+    {
+        internal string Name { get; private set; }
+        internal RbUnitType Type { get; private set; }
+        internal double Multiplier { get; private set; }
+        internal string[] Keywords { get; private set; }
+
+        internal RbConversionUnit(string name, RbUnitType type, double multiplier, params string[] keywords)
+        {
+            Name = name;
+            Type = type;
+            Multiplier = multiplier;
             Keywords = keywords;
         }
     }

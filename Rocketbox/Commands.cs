@@ -71,6 +71,67 @@ namespace Rocketbox
         }
     }
 
+    internal class UnitConversionCommand : RbCommand
+    {
+        private RbConversionUnit _convertFrom;
+        private RbConversionUnit _convertTo;
+
+        private double _valueFrom;
+
+        internal UnitConversionCommand() { }
+
+        public string GetResponse(string arguments)
+        {
+            bool isError = false;
+
+            string[] parts = arguments.Split(' ');
+
+            if(parts.Length < 3)
+            {
+                return "Unit conversion:   Not enough parameters.";
+            }
+
+            /// first and second part = number/unit
+            if(!double.TryParse(parts[0], out _valueFrom))
+            {
+                isError = true;
+            }
+
+            _convertFrom = RbData.GetConversionUnit(parts[1]);
+
+            // last part = output unit
+            // (can use "to" or other combos in the middle)
+            _convertTo = RbData.GetConversionUnit(parts.Last());
+
+
+            if(_convertFrom.Type == RbUnitType.Null || _convertTo.Type == RbUnitType.Null)
+            {
+                isError = true;
+            }
+            else if(_convertFrom.Type != _convertTo.Type)
+            {
+                return "Unit conversion:   Unit type mismatch.";
+            }
+
+
+            if(isError)
+            {
+                return "Unit conversion:   Cannot convert.";
+            }
+            else
+            {
+                double result = (_valueFrom * _convertFrom.Multiplier) / _convertTo.Multiplier;
+                return string.Format("Unit conversion:   {0} {1} = {2} {3}", _valueFrom, _convertFrom.Name, result.ToString("0.#####"), _convertTo.Name);
+            }
+        }
+
+        public bool Execute(string arguments)
+        {
+            // do nothing
+            return false;
+        }
+    }
+
     /// <summary>
     /// Command to launch an application as if it were from a normal command line.
     /// </summary>
