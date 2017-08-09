@@ -49,6 +49,17 @@ namespace Rocketbox
             {
                 _currentCmd = new SearchCommand(matchingSearchEngines.First());
             }
+
+            // run through generic commands
+            switch(Keyword)
+            {
+                case "CONVERT":
+                case "CON":
+                case "CV":
+                case "C":
+                    _currentCmd = new UnitConversionCommand();
+                    break;
+            }
         }
 
         // retrieves the string to be indicated below the text box before a command is sent
