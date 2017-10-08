@@ -64,7 +64,7 @@ namespace Rocketbox
         {
             arguments = arguments.Replace("#", "%23"); // hashtags
 
-            string url = _engine.SearchUrl + arguments;
+            string url = _engine.Url_Prefix + arguments;
 
             Process.Start(url);
 
@@ -77,7 +77,7 @@ namespace Rocketbox
         private RbConversionUnit _convertFrom;
         private RbConversionUnit _convertTo;
 
-        private double _valueFrom;
+        private decimal _valueFrom;
 
         internal UnitConversionCommand() { }
 
@@ -93,7 +93,7 @@ namespace Rocketbox
             }
 
             /// first and second part = number/unit
-            if(!double.TryParse(parts[0], out _valueFrom))
+            if(!decimal.TryParse(parts[0], out _valueFrom))
             {
                 isError = true;
             }
@@ -105,7 +105,7 @@ namespace Rocketbox
             _convertTo = RbData.GetConversionUnit(parts.Last());
 
 
-            if(_convertFrom.Type == RbUnitType.Null || _convertTo.Type == RbUnitType.Null)
+            if(_convertFrom.GetUnitType() == RbUnitType.Null || _convertTo.GetUnitType() == RbUnitType.Null)
             {
                 isError = true;
             }
@@ -121,7 +121,7 @@ namespace Rocketbox
             }
             else
             {
-                double result = (_valueFrom * _convertFrom.Multiplier) / _convertTo.Multiplier;
+                decimal result = (_valueFrom * _convertFrom.Multiplier) / _convertTo.Multiplier;
                 return string.Format("Unit conversion:   {0} {1} = {2} {3}", _valueFrom, _convertFrom.Name, result.ToString("0.#####"), _convertTo.Name);
             }
         }

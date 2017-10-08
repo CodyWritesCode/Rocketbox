@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using LiteDB;
 
 namespace Rocketbox
 {
     internal static class RbData
     {
+        private static LiteDatabase _db;
+
         // Master list of search engines
         internal static List<RbSearchEngine> SearchEngines;
 
@@ -17,103 +20,21 @@ namespace Rocketbox
 
         private static bool isLoaded = false;
 
+        private static void LoadDatabase()
+        {
+            // TODO: errors etc
+            _db = new LiteDatabase("Rocketbox.db");
+
+            SearchEngines = _db.GetCollection<RbSearchEngine>("searchengines").FindAll().ToList<RbSearchEngine>();
+            ConversionUnits = _db.GetCollection<RbConversionUnit>("conversionunits").FindAll().ToList<RbConversionUnit>();
+        }
+
         // Must be called by app before doing anything
         internal static void LoadData()
         {
             if(!isLoaded)
             {
-                // load search engines from config
-                StreamReader reader = new StreamReader("SearchEngines.cfg");
-                string fileContents = reader.ReadToEnd();
-                reader.Close();
-
-                string[] segments = fileContents.Split(new string[] { ";;" }, StringSplitOptions.RemoveEmptyEntries);
-
-                SearchEngines = new List<RbSearchEngine>();
-
-                /*  Config format:
-                 *      Google                            Name of engine
-                 *      https://www.google.ca/search?q=   URL prefix to append parameters to
-                 *      GOOGLE                            Keyword
-                 *      GOOG                              Keyword
-                 *      GL                                Keyword
-                 *      ;;                                Delimeter
-                 * */
-
-                foreach(string segment in segments)
-                {
-                    string[] lines = segment.Trim().Split('\n');
-                    string[] keywords = lines.Skip(2).ToArray();
-                    try
-                    {
-                        SearchEngines.Add(new RbSearchEngine(lines[0], lines[1], keywords));
-                    }
-                    catch(Exception e)
-                    {
-                        RbUtility.ThrowConfigError("Search engine configuration");
-                    }
-                }
-
-                // load conversion units from config
-
-                reader = new StreamReader("ConversionUnits.cfg");
-                fileContents = reader.ReadToEnd();
-                reader.Close();
-
-                segments = fileContents.Split(new string[] { ";;" }, StringSplitOptions.RemoveEmptyEntries);
-
-                ConversionUnits = new List<RbConversionUnit>();
-
-                /*  Config format:
-                 *      Centimeters                       Name of unit
-                 *      DIST                              Type of unit (DIST = distance)
-                 *      10                                Multiplier (number of base units comprising this unit)
-                 *      CENTIMETER                        Keyword
-                 *      CENTIMETRE                        Keyword
-                 *      CENTIMETERS                       Keyword
-                 *      CENTIMETRES                       Keyword
-                 *      CM                                Keyword
-                 *      ;;                                Delimeter
-                 * */
-
-                foreach(string segment in segments)
-                {
-                    string[] lines = segment.Trim().Split('\n');
-                    string[] keywords = lines.Skip(3).ToArray();
-
-                    RbUnitType type = RbUnitType.Null;
-
-                    switch(lines[1])
-                    {
-                        case "DIST":
-                            type = RbUnitType.Distance;
-                            break;
-                        case "VOL":
-                            type = RbUnitType.Volume;
-                            break;
-                        case "MASS":
-                            type = RbUnitType.Mass;
-                            break;
-                        case "DATA":
-                            type = RbUnitType.Data;
-                            break;
-                    }
-
-                    try
-                    {
-                        ConversionUnits.Add(new RbConversionUnit(lines[0], type, Double.Parse(lines[2]), keywords));
-                    }
-                    catch(Exception e)
-                    {
-                        RbUtility.ThrowConfigError("Conversion unit config");
-                    }
-
-                    if (type == RbUnitType.Null)
-                    {
-                        RbUtility.ThrowConfigError("Conversion unit config - invalid type for " + lines[0]);
-                    }
-                }
-
+                LoadDatabase();
 
                 isLoaded = true;
             }
@@ -134,45 +55,52 @@ namespace Rocketbox
             }
             else
             {
-                return new RbConversionUnit("null", RbUnitType.Null, 0, "null");
+                return new RbConversionUnit { Name = "null", Multiplier = 0, Type = "null" };
             }
         }
+    }
+
+    internal class RbSetting
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
     }
 
     /// <summary>
     /// Bundles information for a certain search engine
     /// </summary>
-    internal struct RbSearchEngine
+    internal class RbSearchEngine
     {
-        internal string Name { get; private set; }
-        internal string SearchUrl { get; private set; }
-        internal string[] Keywords { get; private set; }
-       
-        internal RbSearchEngine(string name, string searchUrl, params string[] keywords)
-        {
-            Name = name;
-            SearchUrl = searchUrl;
-
-            Keywords = keywords;
-        }
+        public string Name { get; set; }
+        public string Url_Prefix { get; set; }
+        public string[] Aliases { get; set; }
     }
 
     /// <summary>
     /// Unit for the inline converter
     /// </summary>
-    internal struct RbConversionUnit
+    internal class RbConversionUnit
     {
-        internal string Name { get; private set; }
-        internal RbUnitType Type { get; private set; }
-        internal double Multiplier { get; private set; }
-        internal string[] Keywords { get; private set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public decimal Multiplier { get; set; }
+        public string[] Keywords { get; set; }
 
-        internal RbConversionUnit(string name, RbUnitType type, double multiplier, params string[] keywords)
+        public RbUnitType GetUnitType()
         {
-            Name = name;
-            Type = type;
-            Multiplier = multiplier;
-            Keywords = keywords;
+            switch (Type)
+            {
+                case "DIST":
+                    return RbUnitType.Distance;
+                case "VOL":
+                    return RbUnitType.Volume;
+                case "MASS":
+                    return RbUnitType.Mass;
+                case "DATA":
+                    return RbUnitType.Data;
+                default:
+                    return RbUnitType.Null;
+            }
         }
     }
 }

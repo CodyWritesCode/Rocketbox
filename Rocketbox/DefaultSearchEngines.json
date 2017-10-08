@@ -1,0 +1,72 @@
+﻿[
+	{
+		"Name":			"Google",
+		"Url_Prefix":		"https://www.google.ca/search?q=",
+		"Aliases":		["GOOGLE", "GOOG", "GL"]
+	},
+	{
+		"Name":			"Google (Lucky)",
+		"Url_Prefix":		"http://www.google.ca/search?btnI=I'm+Feeling+Lucky&q=",
+		"Aliases":		["IFL", "LUCKY"]
+	},
+	{
+		"Name":			"Google Maps",
+		"Url_Prefix":		"https://www.google.ca/maps/search/",
+		"Aliases":		["MAPS", "GMAPS"]
+	},
+	{
+		"Name":			"YouTube",
+		"Url_Prefix":		"https://www.youtube.com/results?search_query=",
+		"Aliases":		["YOUTUBE", "YT"]
+	},
+	{
+		"Name":			"Wikipedia",
+		"Url_Prefix":		"https://en.wikipedia.org/wiki/Special:Search?search=",
+		"Aliases":		["WIKIPEDIA", "WP"]
+	},
+	{
+		"Name":			"Reddit",
+		"Url_Prefix":		"https://www.reddit.com/search?restrict_sr=off&sort=relevance&t=all&feature=legacy_search&q=",
+		"Aliases":		["REDDIT"]
+	},
+	{
+		"Name":			"Subreddit",
+		"Url_Prefix":		"https://www.reddit.com/r/",
+		"Aliases":		["/R/", "R/", "SUBREDDIT", "SUB"]
+	},
+	{
+		"Name":			"Bing",
+		"Url_Prefix":		"https://www.bing.com/search?q=",
+		"Aliases":		["BING"]
+	},
+	{
+		"Name":			"Twitter",
+		"Url_Prefix":		"https://twitter.com/search?f=tweets&vertical=default&q=",
+		"Aliases":		["TWITTER", "TW", "#"]
+	},
+	{
+		"Name":			"GitHub",
+		"Url_Prefix":		"https://www.github.com/search?q=",
+		"Aliases":		["GH", "GITHUB"]
+	},
+	{
+		"Name":			"Amazon",
+		"Url_Prefix":		"https://www.amazon.ca/s/&field-keywords=",
+		"Aliases":		["AMAZON", "AZ"]
+	},
+	{
+		"Name":			"Stack Overflow",
+		"Url_Prefix":		"http://www.stackoverflow.com/search?q=",
+		"Aliases":		["STACKOVERFLOW", "SO"]
+	},
+	{
+		"Name":			"Steam (Store)",
+		"Url_Prefix":		"http://store.steampowered.com/search/?snr=1_4_4__12&term=",
+		"Aliases":		["STEAM"]
+	},
+	{
+		"Name": "Steam (Community)",
+		"Url_Prefix": "http://steamcommunity.com/search/?text=",
+		"Aliases": [ "STEAMC", "SC" ]
+	}
+]

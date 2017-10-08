@@ -41,7 +41,7 @@ namespace Rocketbox
 
             // first, test for search engines
             var matchingSearchEngines = from engine in RbData.SearchEngines
-                                        where engine.Keywords.Contains(Keyword)
+                                        where engine.Aliases.Contains(Keyword)
                                         select engine;
 
             // if a search engine is found, change the command

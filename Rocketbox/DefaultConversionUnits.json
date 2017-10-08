@@ -1,0 +1,182 @@
+﻿[
+	{
+		"Name":			"Millimeters",
+		"Type":			"DIST",
+		"Multiplier":	{ "$numberDecimal": "1" },
+		"Keywords":		["MILLIMETER", "MILLIMETRE", "MILLIMETERS", "MILLIMETRES", "MM"]
+	},
+	{
+		"Name":			"Centimeters",
+		"Type":			"DIST",
+		"Multiplier":	{ "$numberDecimal": "10" },
+		"Keywords":		["CENTIMETER", "CENTIMETRE", "CENTIMETERS", "CENTIMETRES", "CM"]
+	},
+	{
+		"Name":			"Inches",
+		"Type":			"DIST",
+		"Multiplier":	{ "$numberDecimal": "25.4" },
+		"Keywords":		["INCH", "INCHES", "IN"]
+	},
+	{
+		"Name":			"Feet",
+		"Type":			"DIST",
+		"Multiplier":	{ "$numberDecimal": "304.8" },
+		"Keywords":		["FOOT", "FEET", "FT"]
+	},
+	{
+		"Name":			"Yards",
+		"Type":			"DIST",
+		"Multiplier":	{ "$numberDecimal": "914.4" },
+		"Keywords":		["YARD", "YARDS", "Y"]
+	},
+	{
+		"Name":			"Meters",
+		"Type":			"DIST",
+		"Multiplier":	{ "$numberDecimal": "1000" },
+		"Keywords":		["METER", "METRE", "METERS", "METRES", "M"]
+	},
+	{
+		"Name":			"Kilometers",
+		"Type":			"DIST",
+		"Multiplier":	{ "$numberDecimal": "1000000" },
+		"Keywords":		["KILOMETER", "KILOMETRE", "KILOMETERS", "KILOMETRES", "KM"]
+	},
+	{
+		"Name":			"Miles",
+		"Type":			"DIST",
+		"Multiplier":	{ "$numberDecimal": "1609344" },
+		"Keywords":		["MILE", "MILES", "MI"]
+	},
+	{
+		"Name":			"Milliliters",
+		"Type":			"VOL",
+		"Multiplier":	{ "$numberDecimal": "1" },
+		"Keywords":		["MILLILITER", "MILLILITRE", "MILLILITERS", "MILLILITRES", "ML"]
+	},
+	{
+		"Name":			"Liters",
+		"Type":			"VOL",
+		"Multiplier":	{ "$numberDecimal": "1000" },
+		"Keywords":		["LITER", "LITRE", "LITERS", "LITRES", "L"]
+	},
+	{
+		"Name":			"US Fluid Ounces",
+		"Type":			"VOL",
+		"Multiplier":	{ "$numberDecimal": "29.5735" },
+		"Keywords":		["FLOZ"]
+	},
+	{
+		"Name":			"US Pints",
+		"Type":			"VOL",
+		"Multiplier":	{ "$numberDecimal": "473.176" },
+		"Keywords":		["PINT", "PINTS", "PT"]
+	},
+	{
+		"Name":			"US Quarts",
+		"Type":			"VOL",
+		"Multiplier":	{ "$numberDecimal": "946.353" },
+		"Keywords":		["QUART", "QUARTS", "QT"]
+	},
+	{
+		"Name":			"US Gallons",
+		"Type":			"VOL",
+		"Multiplier":	{ "$numberDecimal": "3785.41" },
+		"Keywords":		["GALLON", "GALLONS", "GAL"]
+	},
+	{
+		"Name":			"Milligrams",
+		"Type":			"MASS",
+		"Multiplier":	{ "$numberDecimal": "1" },
+		"Keywords":		["MILLIGRAM", "MILLIGRAMS", "MG"]
+	},
+	{
+		"Name":			"Grams",
+		"Type":			"MASS",
+		"Multiplier":	{ "$numberDecimal": "1000" },
+		"Keywords":		["GRAM", "GRAMS", "G"]
+	},
+	{
+		"Name":			"Kilograms",
+		"Type":			"MASS",
+		"Multiplier":	{ "$numberDecimal": "1000000" },
+		"Keywords":		["KILOGRAM", "KILOGRAMS", "KG"]
+	},
+	{
+		"Name":			"Ounces",
+		"Type":			"MASS",
+		"Multiplier":	{ "$numberDecimal": "28349.5" },
+		"Keywords":		["OUNCE", "OUNCES", "OZ"]
+	},
+	{
+		"Name":			"Pounds",
+		"Type":			"MASS",
+		"Multiplier":	{ "$numberDecimal": "453592" },
+		"Keywords":		["POUND", "POUNDS", "LB", "LBS"]
+	},
+	{
+		"Name":			"Metric Tons",
+		"Type":			"MASS",
+		"Multiplier":	{ "$numberDecimal": "1000000000" },
+		"Keywords":		["TON", "TONS", "T"]
+	},
+	{
+		"Name":			"US Tons",
+		"Type":			"MASS",
+		"Multiplier":	{ "$numberDecimal": "907184740" },
+		"Keywords":		["UTON", "UTONS", "UT"]
+	},
+	{
+		"Name":			"Bits",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "1" },
+		"Keywords":		["BIT", "BITS"]
+	},
+	{
+		"Name":			"Kilobits",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "1024" },
+		"Keywords":		["KILOBIT", "KILOBITS", "KBIT", "KBITS"]
+	},
+	{
+		"Name":			"Megabits",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "1048576" },
+		"Keywords":		["MEGABIT", "MEGABITS", "MBIT", "MBITS"]
+	},
+	{
+		"Name":			"Gigabits",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "1073741824" },
+		"Keywords":		["GIGABIT", "GIGABITS", "GBIT", "GBITS"]
+	},
+	{
+		"Name":			"Bytes",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "8" },
+		"Keywords":		["BYTE", "BYTES", "B"]
+	},
+	{
+		"Name":			"Kilobytes",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "8192" },
+		"Keywords":		["KILOBYTE", "KILOBYTES", "KB", "KBYTE", "KBYTES"]
+	},
+	{
+		"Name":			"Megabytes",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "8388608" },
+		"Keywords":		["MEGABYTE", "MEGABYTES", "MB", "MBYTE", "MBYTES"]
+	},
+	{
+		"Name":			"Gigabytes",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "8589934592" },
+		"Keywords":		["GIGABYTE", "GIGABYTES", "GB", "GBYTE", "GBYTES"]
+	},
+	{
+		"Name":			"Terabytes",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "8796093022208" },
+		"Keywords":		["TERABYTE", "TERABYTES", "TB", "TBYTE", "TBYTES"]
+	}
+]
