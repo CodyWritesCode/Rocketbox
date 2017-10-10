@@ -99,6 +99,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="DefaultConversionUnits.json" />
+    <None Include="DefaultLanguages.json" />
     <None Include="DefaultSearchEngines.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
