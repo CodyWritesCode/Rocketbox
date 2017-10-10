@@ -79,6 +79,8 @@ namespace Rocketbox
 
         private decimal _valueFrom;
 
+        private decimal _result;
+
         internal UnitConversionCommand() { }
 
         public string GetResponse(string arguments)
@@ -121,14 +123,14 @@ namespace Rocketbox
             }
             else
             {
-                decimal result = (_valueFrom * _convertFrom.Multiplier) / _convertTo.Multiplier;
-                return string.Format("Unit conversion:   {0} {1} = {2} {3}", _valueFrom, _convertFrom.Name, result.ToString("0.#####"), _convertTo.Name);
+                _result = (_valueFrom * _convertFrom.Multiplier) / _convertTo.Multiplier;
+                return string.Format("Unit conversion:   {0} {1} = {2} {3}", _valueFrom, _convertFrom.Name, _result.ToString("0.#####"), _convertTo.Name);
             }
         }
 
         public bool Execute(string arguments)
         {
-            // do nothing
+            System.Windows.Clipboard.SetText(_result.ToString("0.#####"));
             return false;
         }
     }

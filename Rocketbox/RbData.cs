@@ -18,6 +18,9 @@ namespace Rocketbox
         // Master list of converter units
         internal static List<RbConversionUnit> ConversionUnits;
 
+        // Master list of Google Translate languages
+        internal static List<RbTranslateLanguage> TranslateLanguages;
+
         private static bool isLoaded = false;
 
         private static void LoadDatabase()
@@ -27,6 +30,8 @@ namespace Rocketbox
 
             SearchEngines = _db.GetCollection<RbSearchEngine>("searchengines").FindAll().ToList<RbSearchEngine>();
             ConversionUnits = _db.GetCollection<RbConversionUnit>("conversionunits").FindAll().ToList<RbConversionUnit>();
+            TranslateLanguages = _db.GetCollection<RbTranslateLanguage>("languages").FindAll().ToList<RbTranslateLanguage>();
+
         }
 
         // Must be called by app before doing anything
@@ -102,5 +107,15 @@ namespace Rocketbox
                     return RbUnitType.Null;
             }
         }
+    }
+
+    /// <summary>
+    /// Google Translate language definition
+    /// </summary>
+    internal class RbTranslateLanguage
+    {
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public string[] Keywords { get; set; }
     }
 }

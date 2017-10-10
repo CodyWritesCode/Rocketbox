@@ -1,0 +1,292 @@
+﻿[
+	{
+		"Name":			"English",
+		"Code":			"en",
+		"Keywords":		["ENGLISH", "ENG", "EN"]
+	},
+	{
+		"Name":			"French",
+		"Code":			"fr",
+		"Keywords":		["FRENCH", "FRE", "FR"]
+	},
+	{
+		"Name":			"Spanish",
+		"Code":			"es",
+		"Keywords":		["SPANISH", "ESPANOL", "SPAN", "ES"]
+	},
+	{
+		"Name":			"Italian",
+		"Code":			"it",
+		"Keywords":		["ITALIAN", "IT"]
+	},
+	{
+		"Name":			"Portuguese",
+		"Code":			"pt",
+		"Keywords":		["PORTUGUESE", "PORT", "PT"]
+	},
+	{
+		"Name":			"Welsh",
+		"Code":			"cy",
+		"Keywords":		["WELSH", "WEL", "CY"]
+	},
+	{
+		"Name":			"Irish",
+		"Code":			"ga",
+		"Keywords":		["IRISH", "IRI", "GA"]
+	},
+	{
+		"Name":			"German",
+		"Code":			"de",
+		"Keywords":		["GERMAN", "DEUTSCH", "DE"]
+	},
+	{
+		"Name":			"Polish",
+		"Code":			"pl",
+		"Keywords":		["POLISH", "POL", "PL"]
+	},
+	{
+		"Name":			"Hungarian",
+		"Code":			"hu",
+		"Keywords":		["HUNGARIAN", "HU"]
+	},
+	{
+		"Name":			"Slovenian",
+		"Code":			"sl",
+		"Keywords":		["SLOVENIAN", "SL"]
+	},
+	{
+		"Name":			"Slovak",
+		"Code":			"sk",
+		"Keywords":		["SLOVAK", "SK"]
+	},
+	{
+		"Name":			"Czech",
+		"Code":			"cs",
+		"Keywords":		["CZECH", "CZE" , "CS"]
+	},
+	{
+		"Name":			"Croatian",
+		"Code":			"hr",
+		"Keywords":		["CROATIAN", "CRO", "HR"]
+	},
+	{
+		"Name":			"Greek",
+		"Code":			"el",
+		"Keywords":		["GREEK", "EL"]
+	},
+	{
+		"Name":			"Macedonian",
+		"Code":			"mk",
+		"Keywords":		["MACEDONIAN", "MACE", "MK"]
+	},
+	{
+		"Name":			"Bosnian",
+		"Code":			"bs",
+		"Keywords":		["BOSNIAN", "BOS", "BS"]
+	},
+	{
+		"Name":			"Serbian",
+		"Code":			"sr",
+		"Keywords":		["SERBIAN", "SERB", "SR"]
+	},
+	{
+		"Name":			"Albanian",
+		"Code":			"sq",
+		"Keywords":		["ALBANIAN", "ALB", "SQ"]
+	},
+	{
+		"Name":			"Romanian",
+		"Code":			"RO",
+		"Keywords":		["ROMANIAN", "ROM", "RO"]
+	},
+	{
+		"Name":			"Estonian",
+		"Code":			"et",
+		"Keywords":		["ESTONIAN", "ESTO", "ET"]
+	},
+	{
+		"Name":			"Latvian",
+		"Code":			"lv",
+		"Keywords":		["LATVIAN", "LAT", "LV"]
+	},
+	{
+		"Name":			"Lithuanian",
+		"Code":			"lt",
+		"Keywords":		["LITHUANIAN", "LIT", "LITH", "LT"]
+	},
+	{
+		"Name":			"Georgian",
+		"Code":			"ka",
+		"Keywords":		["GEORGIAN", "GEO", "KA"]
+	},
+	{
+		"Name":			"Swedish",
+		"Code":			"sv",
+		"Keywords":		["SWEDISH", "SWE", "SV"]
+	},
+	{
+		"Name":			"Norwegian",
+		"Code":			"no",
+		"Keywords":		["NORWEGIAN", "NOR", "NO"]
+	},
+	{
+		"Name":			"Danish",
+		"Code":			"da",
+		"Keywords":		["DANISH", "DAN", "DA"]
+	},
+	{
+		"Name":			"Finnish",
+		"Code":			"fi",
+		"Keywords":		["FINNISH", "FIN", "FI"]
+	},
+	{
+		"Name":			"Icelandic",
+		"Code":			"is",
+		"Keywords":		["ICELANDIC", "ICE", "IS"]
+	},
+	{
+		"Name":			"Russian",
+		"Code":			"ru",
+		"Keywords":		["RUSSIAN", "RUS", "RU"]
+	},
+	{
+		"Name":			"Ukrainian",
+		"Code":			"uk",
+		"Keywords":		["UKRAINIAN", "UK"]
+	},
+	{
+		"Name":			"Bulgarian",
+		"Code":			"bg",
+		"Keywords":		["BULGARIAN", "BUL", "BG"]
+	},
+	{
+		"Name":			"Belarusian",
+		"Code":			"be",
+		"Keywords":		["BELARUSIAN", "BEL", "BE"]
+	},
+	{
+		"Name":			"Uzbek",
+		"Code":			"uz",
+		"Keywords":		["UZBEK", "UZ"]
+	},
+	{
+		"Name":			"Kazakh",
+		"Code":			"kk",
+		"Keywords":		["KAZAKH", "KK"]
+	},
+	{
+		"Name":			"Kyrgyz",
+		"Code":			"ky",
+		"Keywords":		["KYRGYZ", "KY"]
+	},
+	{
+		"Name":			"Tajik",
+		"Code":			"tg",
+		"Keywords":		["TAJIK", "TAJ", "TG"]
+	},
+	{
+		"Name":			"Mongolian",
+		"Code":			"mn",
+		"Keywords":		["MONGOLIAN", "MON", "MN"]
+	},
+	{
+		"Name":			"Chinese",
+		"Code":			"zh-CN",
+		"Keywords":		["CHINESE", "MANDARIN", "CN", "ZH"]
+	},
+	{
+		"Name":			"Japanese",
+		"Code":			"ja",
+		"Keywords":		["JAPANESE", "JAP", "JP"]
+	},
+	{
+		"Name":			"Korean",
+		"Code":			"ko",
+		"Keywords":		["KOREAN", "KO"]
+	},
+	{
+		"Name":			"Thai",
+		"Code":			"TH",
+		"Keywords":		["THAI", "TH"]
+	},
+	{
+		"Name":			"Malay",
+		"Code":			"ms",
+		"Keywords":		["MALAY", "MAL", "MS"]
+	},
+	{
+		"Name":			"Vietnamese",
+		"Code":			"vi",
+		"Keywords":		["VIETNAMESE", "VIET", "VI"]
+	},
+	{
+		"Name":			"Hindi",
+		"Code":			"hi",
+		"Keywords":		["HINDI", "HIN", "HI"]
+	},
+	{
+		"Name":			"Punjabi",
+		"Code":			"pa",
+		"Keywords":		["PUNJABI", "PA"]
+	},
+	{
+		"Name":			"Malayalam",
+		"Code":			"ml",
+		"Keywords":		["MALAYALAM", "ML"]
+	},
+	{
+		"Name":			"Indonesian",
+		"Code":			"id",
+		"Keywords":		["INDONESIAN", "INDO", "ID"]
+	},
+	{
+		"Name":			"Filipino",
+		"Code":			"tl",
+		"Keywords":		["FILIPINO", "FIL", "TL"]
+	},
+	{
+		"Name":			"Hawaiian",
+		"Code":			"haw",
+		"Keywords":		["HAWAIIAN", "HAW"]
+	},
+	{
+		"Name":			"Samoan",
+		"Code":			"sm",
+		"Keywords":		["SAMOAN", "SAM", "SM"]
+	},
+	{
+		"Name":			"Turkish",
+		"Code":			"tr",
+		"Keywords":		["TURKISH", "TURK", "TR"]
+	},
+	{
+		"Name":			"Arabic",
+		"Code":			"ar",
+		"Keywords":		["ARABIC", "AR"]
+	},
+	{
+		"Name":			"Armenian",
+		"Code":			"hy",
+		"Keywords":		["ARMENIAN", "ARM", "HY"]
+	},
+	{
+		"Name":			"Persian",
+		"Code":			"fa",
+		"Keywords":		["PERSIAN", "PERS", "FA"]
+	},
+	{
+		"Name":			"Hebrew",
+		"Code":			"iw",
+		"Keywords":		["HEBREW", "HEB", "IW"]
+	},
+	{
+		"Name":			"Latin",
+		"Code":			"la",
+		"Keywords":		["LATIN", "LA"]
+	},
+	{
+		"Name":			"Esperanto",
+		"Code":			"eo",
+		"Keywords":		["ESPERANTO", "ESP", "EO"]
+	}
+]
