@@ -59,6 +59,11 @@ namespace Rocketbox
                 case "C":
                     _currentCmd = new UnitConversionCommand();
                     break;
+                case "TRANSLATE":
+                case "TRANS":
+                case "TR":
+                    _currentCmd = new TranslateCommand();
+                    break;
                 case "=":
                     _currentCmd = new CalculatorCommand();
                     break;
