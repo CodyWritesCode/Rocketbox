@@ -67,6 +67,10 @@ namespace Rocketbox
                 case "=":
                     _currentCmd = new CalculatorCommand();
                     break;
+                case "TIME":
+                case "T":
+                    _currentCmd = new TimeCommand();
+                    break;
             }
         }
 
