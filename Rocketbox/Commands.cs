@@ -18,6 +18,9 @@ namespace Rocketbox
 
         // runs the command - the boolean signals to the invoker whether Rocketbox should be closed or not
         bool Execute(string arguments);
+
+        // gets the icon in the /icons directory, if any
+        string GetIcon();
     }
 
     /// <summary>
@@ -36,6 +39,11 @@ namespace Rocketbox
         {
             // do nothing
             return false;
+        }
+
+        public string GetIcon()
+        {
+            return string.Empty;
         }
     }
 
@@ -69,6 +77,11 @@ namespace Rocketbox
             Process.Start(url);
 
             return true;
+        }
+
+        public string GetIcon()
+        {
+            return _engine.Icon;
         }
     }
 
@@ -133,6 +146,11 @@ namespace Rocketbox
             System.Windows.Clipboard.SetText(_result.ToString("0.#####"));
             return false;
         }
+
+        public string GetIcon()
+        {
+            return string.Empty;
+        }
     }
 
     /// <summary>
@@ -175,6 +193,11 @@ namespace Rocketbox
 
             return true;
         }
+
+        public string GetIcon()
+        {
+            return string.Empty;
+        }
     }
 
     /// <summary>
@@ -209,6 +232,11 @@ namespace Rocketbox
         {
             System.Windows.Clipboard.SetText(_result);
             return false;
+        }
+
+        public string GetIcon()
+        {
+            return "calculator.png";
         }
     }
 
@@ -280,6 +308,11 @@ namespace Rocketbox
                 return true;
             }
         }
+
+        public string GetIcon()
+        {
+            return "translate.png";
+        }
     }
 
     internal class TimeCommand : RbCommand
@@ -298,6 +331,11 @@ namespace Rocketbox
         public bool Execute(string arguments)
         {
             return false;
+        }
+
+        public string GetIcon()
+        {
+            return string.Empty;
         }
     }
 }
