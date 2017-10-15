@@ -281,4 +281,23 @@ namespace Rocketbox
             }
         }
     }
+
+    internal class TimeCommand : RbCommand
+    {
+
+        internal TimeCommand() { }
+
+        public string GetResponse(string arguments)
+        {
+            string dateFmt = "dddd, MMMM d, yyyy   h:mm tt";
+            string timeStr = string.Format("Current date/time:   {0}", DateTime.Now.ToString(dateFmt));
+
+            return timeStr;
+        }
+
+        public bool Execute(string arguments)
+        {
+            return false;
+        }
+    }
 }
