@@ -41,6 +41,19 @@ namespace Rocketbox
         {
             Invoker.Invoke(textConsole.Text);
             responseText.Text = Invoker.GetResponse();
+
+            string icon = Invoker.GetIcon();
+            if(icon.Trim() != string.Empty)
+            {
+                if(RbUtility.IconExists(icon))
+                {
+                    iconView.Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\icons\\" + icon));
+                }
+            }
+            else
+            {
+                iconView.Source = null;
+            }
         }
 
         private void KeyPress(object sender, KeyEventArgs e)

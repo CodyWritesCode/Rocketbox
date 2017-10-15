@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,18 @@ namespace Rocketbox
         internal static void ThrowConfigError(string information)
         {
             throw new Exception("Malformed configuration file: " + information);
+        }
+
+        internal static bool IconExists(string icon)
+        {
+            if(File.Exists(Environment.CurrentDirectory + "\\icons\\" + icon))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

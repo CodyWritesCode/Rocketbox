@@ -95,5 +95,16 @@ namespace Rocketbox
 
             return _currentCmd.Execute(Parameters);
         }
+
+        // sets an icon, if any
+        internal static string GetIcon()
+        {
+            if(_currentText.Trim() == string.Empty)
+            {
+                return new NullCommand().GetIcon();
+            }
+
+            return _currentCmd.GetIcon();
+        }
     }
 }
