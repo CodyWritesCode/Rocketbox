@@ -30,7 +30,7 @@ namespace Rocketbox
 
             Invoker.Invoke(textConsole.Text);
 
-            this.Deactivated += (sender, e) => this.Close();
+            //this.Deactivated += (sender, e) => this.Close();
             this.KeyDown += KeyPress;
             this.Loaded += (sender, e) => textConsole.Focus();
 

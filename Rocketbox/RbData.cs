@@ -21,6 +21,10 @@ namespace Rocketbox
         // Master list of Google Translate languages
         internal static List<RbTranslateLanguage> TranslateLanguages;
 
+        // Universal time/date format
+        private static string _dateFmt = "dddd, MMMM d, yyyy  ―  h:mm tt";
+        internal static string DateFormat { get { return _dateFmt; } }
+
         private static bool isLoaded = false;
 
         private static void LoadDatabase()
