@@ -14,4 +14,20 @@ namespace Rocketbox
         Mass,
         Data
     }
+
+    internal enum RbTimeDiffMode
+    {
+        Add,
+        Subtract
+    }
+
+    internal enum RbDateCalcUnit
+    {
+        Null,
+        Minutes,
+        Hours,
+        Days,
+        Months,
+        Years
+    }
 }

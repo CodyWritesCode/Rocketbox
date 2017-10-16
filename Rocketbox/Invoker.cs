@@ -71,6 +71,12 @@ namespace Rocketbox
                 case "T":
                     _currentCmd = new TimeCommand();
                     break;
+                case "T+":
+                    _currentCmd = new TimeDiffCommand(RbTimeDiffMode.Add);
+                    break;
+                case "T-":
+                    _currentCmd = new TimeDiffCommand(RbTimeDiffMode.Subtract);
+                    break;
             }
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using NCalc;
 
 namespace Rocketbox
@@ -322,8 +323,7 @@ namespace Rocketbox
 
         public string GetResponse(string arguments)
         {
-            string dateFmt = "dddd, MMMM d, yyyy   h:mm tt";
-            string timeStr = string.Format("Current date/time:   {0}", DateTime.Now.ToString(dateFmt));
+            string timeStr = string.Format("Current date/time:   {0}", DateTime.Now.ToString(RbData.DateFormat));
 
             return timeStr;
         }
@@ -337,5 +337,89 @@ namespace Rocketbox
         {
             return string.Empty;
         }
+    }
+
+    internal class TimeDiffCommand : RbCommand
+    {
+        private RbTimeDiffMode _mode;
+
+        internal TimeDiffCommand(RbTimeDiffMode mode)
+        {
+            _mode = mode;
+        }
+
+        public string GetResponse(string arguments)
+        {
+            bool error = false;
+            string errorString = "Cannot compute date/time.";
+
+            if(arguments.Trim() == string.Empty) { errorString = "Add/subtract date/time..."; }
+
+            string[] parts = arguments.ToUpper().Split(' ');
+
+            DateTime calcDate = DateTime.Now;
+
+            foreach (string s in parts)
+            {
+                RbDateCalcUnit unit = RbDateCalcUnit.Null;
+
+                int diff = 0;
+                try
+                {
+                    diff = int.Parse(Regex.Match(s, @"\d+").Value);
+                }
+                catch { error = true; }
+
+                if(_mode == RbTimeDiffMode.Subtract)
+                {
+                    diff = -diff;
+                }
+
+                if (s.EndsWith("MI") || s.EndsWith("MIN") || s.EndsWith("MINS") || s.EndsWith("MINUTE") || s.EndsWith("MINUTES"))
+                {
+                    calcDate = calcDate.AddMinutes(diff);
+                }
+                else if (s.EndsWith("H") || s.EndsWith("HR") || s.EndsWith("HRS") || s.EndsWith("HOUR") || s.EndsWith("HOURS"))
+                {
+                    calcDate = calcDate.AddHours(diff);
+                }
+                else if (s.EndsWith("D") || s.EndsWith("DAY") || s.EndsWith("DAYS"))
+                {
+                    calcDate = calcDate.AddDays(diff);
+                }
+                else if (s.EndsWith("MO") || s.EndsWith("MONTH") || s.EndsWith("MONTHS"))
+                {
+                    calcDate = calcDate.AddMonths(diff);
+                }
+                else if (s.EndsWith("Y") || s.EndsWith("YR") || s.EndsWith("YRS") || s.EndsWith("YEAR") || s.EndsWith("YEARS"))
+                {
+                    calcDate = calcDate.AddYears(diff);
+                }
+                else
+                {
+                    error = true;
+                }
+            }
+
+            if(error)
+            {
+                return errorString;
+            }
+            else
+            {
+                return string.Format("Calculated date/time:   {0}", calcDate.ToString(RbData.DateFormat));
+            }
+        }
+
+        public bool Execute(string arguments)
+        {
+            return false;
+        }
+
+        public string GetIcon()
+        {
+            return string.Empty;
+        }
+
     }
 }
