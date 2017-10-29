@@ -1,0 +1,21 @@
+The default icons included with Rocketbox were produced by third-party artists: 
+
+- The Google, Twitter, YouTube, and GitHub icons were designed by Naveed Hussain. The GitHub icon was modified slightly from its original design.
+	https://www.iconfinder.com/flaticondesign
+
+- The Bing and Stack Overflow icons were designed by Rebin Infotech and are licensed under the Creative Commons Atribution 3.0 Unported License.
+	https://www.iconfinder.com/rebininfotech
+	https://creativecommons.org/licenses/by/3.0/
+	
+- The Wikipedia icon is a copy of the wikipedia.org favicon, and is used under the Wikimedia Foundation's Identity Guidelines for Wikipedia.
+	https://wikimediafoundation.org/wiki/Visual_identity_guidelines
+	
+- The Reddit, Amazon, and Steam icons were designed by Xinh Studio. The Steam icon was modified slightly from its original design.
+	https://www.iconfinder.com/xinhstudio
+	
+- The Google Translate and Google Maps icons were designed by Chamestudio Pvt Ltd., and are licensed under the Creative Commons Atribution 3.0 Unported License. The Maps icon has been modified slightly from its original design.
+	https://www.iconfinder.com/chamedesign
+	https://creativecommons.org/licenses/by/3.0/
+
+- The calculator icon was designed by Maxim Basinski.
+	https://www.iconfinder.com/vasabii
