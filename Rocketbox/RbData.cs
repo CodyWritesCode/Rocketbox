@@ -78,15 +78,6 @@ namespace Rocketbox
     }
 
     /// <summary>
-    /// Not used yet
-    /// </summary>
-    internal class RbSetting
-    {
-        public string Name { get; set; }
-        public int Value { get; set; }
-    }
-
-    /// <summary>
     /// Bundles information for a certain search engine
     /// </summary>
     internal class RbSearchEngine
