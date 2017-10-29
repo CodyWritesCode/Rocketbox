@@ -102,7 +102,7 @@ namespace Rocketbox
             return _currentCmd.Execute(Parameters);
         }
 
-        // sets an icon, if any
+        // sets the command's icon, if any
         internal static string GetIcon()
         {
             if(_currentText.Trim() == string.Empty)

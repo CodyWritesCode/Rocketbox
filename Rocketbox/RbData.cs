@@ -27,6 +27,9 @@ namespace Rocketbox
 
         private static bool isLoaded = false;
 
+        /// <summary>
+        /// Loads the Rocketbox database
+        /// </summary>
         private static void LoadDatabase()
         {
             // TODO: errors etc
@@ -37,7 +40,9 @@ namespace Rocketbox
             TranslateLanguages = _db.GetCollection<RbTranslateLanguage>("languages").FindAll().ToList<RbTranslateLanguage>();
         }
 
-        // Must be called by app before doing anything
+        /// <summary>
+        /// Must be called by the app before doing anything
+        /// </summary>
         internal static void LoadData()
         {
             if(!isLoaded)
@@ -48,7 +53,11 @@ namespace Rocketbox
             }
         }
 
-
+        /// <summary>
+        /// Searches the Rocketbox database for conversion units
+        /// </summary>
+        /// <param name="keyword">The keyword of the unit</param>
+        /// <returns>The unit, or a null unit if invalid</returns>
         internal static RbConversionUnit GetConversionUnit(string keyword)
         {
             keyword = keyword.ToUpper();
@@ -68,6 +77,9 @@ namespace Rocketbox
         }
     }
 
+    /// <summary>
+    /// Not used yet
+    /// </summary>
     internal class RbSetting
     {
         public string Name { get; set; }
