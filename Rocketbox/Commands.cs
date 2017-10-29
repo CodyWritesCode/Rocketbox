@@ -86,6 +86,9 @@ namespace Rocketbox
         }
     }
 
+    /// <summary>
+    /// Command for converting between units of measurement.
+    /// </summary>
     internal class UnitConversionCommand : RbCommand
     {
         private RbConversionUnit _convertFrom;
@@ -108,7 +111,7 @@ namespace Rocketbox
                 return "Unit conversion:   Not enough parameters.";
             }
 
-            /// first and second part = number/unit
+            // first and second part = number/unit
             if(!decimal.TryParse(parts[0], out _valueFrom))
             {
                 isError = true;
@@ -217,6 +220,7 @@ namespace Rocketbox
         {
             try
             {
+                // Math is processed by ncalc
                 Expression expr = new Expression(arguments);
                 _result = Convert.ToDecimal(expr.Evaluate()).ToString();
             }
@@ -241,6 +245,9 @@ namespace Rocketbox
         }
     }
 
+    /// <summary>
+    /// Command for launching Google Translate
+    /// </summary>
     internal class TranslateCommand : RbCommand
     {
         private RbTranslateLanguage _fromLang;
@@ -254,6 +261,10 @@ namespace Rocketbox
             _textToTranslate = "";
         }
 
+        /// <summary>
+        /// Determines the languages and then puts them into the command
+        /// </summary>
+        /// <param name="arguments">The language string</param>
         private void Decode(string arguments)
         {
             List<string> parts = arguments.Split(' ').ToList();
@@ -274,6 +285,7 @@ namespace Rocketbox
                 if(matchingLangs.Count() > 0) { _toLang = matchingLangs.First(); }
             }
 
+            // finds the string to translate (starts at index 2 of the array)
             if(parts.Count > 2)
             {
                 parts.RemoveRange(0, 2);
@@ -316,6 +328,9 @@ namespace Rocketbox
         }
     }
 
+    /// <summary>
+    /// Command for simply displaying a date/time
+    /// </summary>
     internal class TimeCommand : RbCommand
     {
 
@@ -339,6 +354,9 @@ namespace Rocketbox
         }
     }
 
+    /// <summary>
+    /// Command for finding differences from the current time/date
+    /// </summary>
     internal class TimeDiffCommand : RbCommand
     {
         private RbTimeDiffMode _mode;
@@ -359,6 +377,7 @@ namespace Rocketbox
 
             DateTime calcDate = DateTime.Now;
 
+            // goes through each part of the arguments to decipher the units/amount of time specified
             foreach (string s in parts)
             {
                 RbDateCalcUnit unit = RbDateCalcUnit.Null;
@@ -370,6 +389,7 @@ namespace Rocketbox
                 }
                 catch { error = true; }
 
+                // whether we're adding to or subtracting from the current date/time
                 if(_mode == RbTimeDiffMode.Subtract)
                 {
                     diff = -diff;

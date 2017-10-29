@@ -30,6 +30,10 @@ namespace Rocketbox
 
             Invoker.Invoke(textConsole.Text);
 
+            // Event assignments:
+            //  Window will close if unfocused
+            //  Other window items will update if a key is pressed
+            //  Text box will focus when focused (loaded)
             this.Deactivated += (sender, e) => this.Close();
             this.KeyDown += KeyPress;
             this.Loaded += (sender, e) => textConsole.Focus();
@@ -39,9 +43,11 @@ namespace Rocketbox
 
         private void TextUpdated(object sender, TextChangedEventArgs e)
         {
+            // Invoker will process the command and return its result
             Invoker.Invoke(textConsole.Text);
             responseText.Text = Invoker.GetResponse();
 
+            // Set an icon if the icon file listed in the command exists
             string icon = Invoker.GetIcon();
             if(icon.Trim() != string.Empty)
             {
