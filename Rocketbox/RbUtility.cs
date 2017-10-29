@@ -34,15 +34,6 @@ namespace Rocketbox
         }
 
         /// <summary>
-        /// Deprecated
-        /// </summary>
-        /// <param name="information"></param>
-        internal static void ThrowConfigError(string information)
-        {
-            throw new Exception("Malformed configuration file: " + information);
-        }
-
-        /// <summary>
         /// Checks if an icon exists in the icons directory
         /// </summary>
         /// <param name="icon">The icon file name to be checked</param>
