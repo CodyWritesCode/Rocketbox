@@ -369,6 +369,8 @@ namespace Rocketbox
         public string GetResponse(string arguments)
         {
             bool error = false;
+            bool beforeCE = false;
+            int beforeCEYear = 0;
             string errorString = "Cannot compute date/time.";
 
             if (arguments.Trim() == string.Empty) { errorString = "Add/subtract date/time..."; }
@@ -413,7 +415,18 @@ namespace Rocketbox
                 }
                 else if (s.EndsWith("Y") || s.EndsWith("YR") || s.EndsWith("YRS") || s.EndsWith("YEAR") || s.EndsWith("YEARS"))
                 {
-                    calcDate = calcDate.AddYears(diff);
+                    try
+                    {
+                        calcDate = calcDate.AddYears(diff);
+                    }
+                    catch(ArgumentOutOfRangeException e)
+                    {
+                        if(_mode == RbTimeDiffMode.Subtract)
+                        {
+                            beforeCE = true;
+                            beforeCEYear = -(DateTime.Now.Year + diff);
+                        }
+                    }
                 }
                 else
                 {
@@ -427,7 +440,14 @@ namespace Rocketbox
             }
             else
             {
-                return string.Format("Calculated date/time:   {0}", calcDate.ToString(RbData.DateFormat));
+                if(!beforeCE)
+                {
+                    return string.Format("Calculated date/time:   {0}", calcDate.ToString(RbData.DateFormat));
+                }
+                else
+                {
+                    return string.Format("Calculated date/time:   {0}, {1} BCE  ―  {2}", calcDate.ToString("MMMM d"), beforeCEYear, calcDate.ToString("h:mm tt"));
+                }
             }
         }
 
