@@ -9,8 +9,8 @@
     <Grid x:Name="backgroundGrid" Height="181" VerticalAlignment="Top">
         <TextBox x:Name="textConsole" HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="1326" Background="#00051C" Foreground="White" IsUndoEnabled="True" VerticalContentAlignment="Center" FontSize="24" FontFamily="Consolas"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="32" Margin="22,81,0,0" VerticalAlignment="Top" Width="32" Stretch="Fill"/>
-        <TextBlock x:Name="responseText" HorizontalAlignment="Left" Margin="63,85,0,0" TextWrapping="Wrap" Text="responseText" VerticalAlignment="Top" Foreground="White" FontWeight="Bold" FontSize="18" Width="1273"/>
-        <Image x:Name="iconView" HorizontalAlignment="Left" Height="32" Margin="20,81,0,0" VerticalAlignment="Top" Width="32"/>
+        <TextBlock x:Name="responseText" HorizontalAlignment="Left" Margin="63,85,0,0" TextWrapping="Wrap" Text="responseText" VerticalAlignment="Top" Foreground="White" FontSize="21" Width="1273" FontFamily="Segoe UI Semibold"/>
+        <Image x:Name="iconView" HorizontalAlignment="Left" Height="32" Margin="20,84,0,0" VerticalAlignment="Top" Width="32"/>
 
     </Grid>
 </Window>

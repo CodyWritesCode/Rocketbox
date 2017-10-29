@@ -20,14 +20,6 @@ namespace Rocketbox
         Add,
         Subtract
     }
+    
 
-    internal enum RbDateCalcUnit
-    {
-        Null,
-        Minutes,
-        Hours,
-        Days,
-        Months,
-        Years
-    }
 }

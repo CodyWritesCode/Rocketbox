@@ -189,7 +189,7 @@ namespace Rocketbox
             {
                 Process.Start(info);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // if launch fails, just do nothing
                 return false;
@@ -382,8 +382,6 @@ namespace Rocketbox
             // goes through each part of the arguments to decipher the units/amount of time specified
             foreach (string s in parts)
             {
-                RbDateCalcUnit unit = RbDateCalcUnit.Null;
-
                 int diff = 0;
                 try
                 {
@@ -419,7 +417,7 @@ namespace Rocketbox
                     {
                         calcDate = calcDate.AddYears(diff);
                     }
-                    catch(ArgumentOutOfRangeException e)
+                    catch(ArgumentOutOfRangeException)
                     {
                         if(_mode == RbTimeDiffMode.Subtract)
                         {
