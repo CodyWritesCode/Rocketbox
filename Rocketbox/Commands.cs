@@ -106,13 +106,13 @@ namespace Rocketbox
 
             string[] parts = arguments.Split(' ');
 
-            if(parts.Length < 3)
+            if (parts.Length < 3)
             {
                 return "Unit conversion:   Not enough parameters.";
             }
 
             // first and second part = number/unit
-            if(!decimal.TryParse(parts[0], out _valueFrom))
+            if (!decimal.TryParse(parts[0], out _valueFrom))
             {
                 isError = true;
             }
@@ -124,17 +124,17 @@ namespace Rocketbox
             _convertTo = RbData.GetConversionUnit(parts.Last());
 
 
-            if(_convertFrom.GetUnitType() == RbUnitType.Null || _convertTo.GetUnitType() == RbUnitType.Null)
+            if (_convertFrom.GetUnitType() == RbUnitType.Null || _convertTo.GetUnitType() == RbUnitType.Null)
             {
                 isError = true;
             }
-            else if(_convertFrom.Type != _convertTo.Type)
+            else if (_convertFrom.Type != _convertTo.Type)
             {
                 return "Unit conversion:   Unit type mismatch.";
             }
 
 
-            if(isError)
+            if (isError)
             {
                 return "Unit conversion:   Cannot convert.";
             }
@@ -189,7 +189,7 @@ namespace Rocketbox
             {
                 Process.Start(info);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 // if launch fails, just do nothing
                 return false;
@@ -224,7 +224,7 @@ namespace Rocketbox
                 Expression expr = new Expression(arguments);
                 _result = Convert.ToDecimal(expr.Evaluate()).ToString();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 _result = "Error";
             }
@@ -254,7 +254,7 @@ namespace Rocketbox
         private RbTranslateLanguage _toLang;
         private string _textToTranslate;
 
-        internal TranslateCommand ()
+        internal TranslateCommand()
         {
             _fromLang = null;
             _toLang = null;
@@ -269,24 +269,24 @@ namespace Rocketbox
         {
             List<string> parts = arguments.Split(' ').ToList();
 
-            if(parts.Count > 0)
+            if (parts.Count > 0)
             {
                 var matchingLangs = from lang in RbData.TranslateLanguages
                                     where lang.Keywords.Contains(parts[0].ToUpper())
                                     select lang;
-                if(matchingLangs.Count() > 0) { _fromLang = matchingLangs.First(); }
+                if (matchingLangs.Count() > 0) { _fromLang = matchingLangs.First(); }
             }
 
-            if(parts.Count > 1)
+            if (parts.Count > 1)
             {
                 var matchingLangs = from lang in RbData.TranslateLanguages
                                     where lang.Keywords.Contains(parts[1].ToUpper())
                                     select lang;
-                if(matchingLangs.Count() > 0) { _toLang = matchingLangs.First(); }
+                if (matchingLangs.Count() > 0) { _toLang = matchingLangs.First(); }
             }
 
             // finds the string to translate (starts at index 2 of the array)
-            if(parts.Count > 2)
+            if (parts.Count > 2)
             {
                 parts.RemoveRange(0, 2);
                 _textToTranslate = string.Join(" ", parts);
@@ -300,8 +300,8 @@ namespace Rocketbox
 
             string nameA = "Unknown", nameB = "Unknown";
 
-            if(_fromLang != null) { nameA = _fromLang.Name; }
-            if(_toLang != null) { nameB = _toLang.Name; }
+            if (_fromLang != null) { nameA = _fromLang.Name; }
+            if (_toLang != null) { nameB = _toLang.Name; }
 
             return String.Format("Translate {0} to {1}: \"{2}\"", nameA, nameB, _textToTranslate);
         }
@@ -310,7 +310,7 @@ namespace Rocketbox
         {
             Decode(arguments);
 
-            if(_fromLang == null || _toLang == null)
+            if (_fromLang == null || _toLang == null)
             {
                 return false;
             }
@@ -371,7 +371,7 @@ namespace Rocketbox
             bool error = false;
             string errorString = "Cannot compute date/time.";
 
-            if(arguments.Trim() == string.Empty) { errorString = "Add/subtract date/time..."; }
+            if (arguments.Trim() == string.Empty) { errorString = "Add/subtract date/time..."; }
 
             string[] parts = arguments.ToUpper().Split(' ');
 
@@ -390,7 +390,7 @@ namespace Rocketbox
                 catch { error = true; }
 
                 // whether we're adding to or subtracting from the current date/time
-                if(_mode == RbTimeDiffMode.Subtract)
+                if (_mode == RbTimeDiffMode.Subtract)
                 {
                     diff = -diff;
                 }
@@ -421,7 +421,7 @@ namespace Rocketbox
                 }
             }
 
-            if(error)
+            if (error)
             {
                 return errorString;
             }
@@ -441,5 +441,81 @@ namespace Rocketbox
             return string.Empty;
         }
 
+    }
+
+    /// <summary>
+    /// Command for comparing the difference between now and another date
+    /// </summary>
+    internal class TimeCompareCommand : RbCommand
+    {
+        public TimeCompareCommand() { }
+
+        public string GetResponse(string arguments)
+        {
+            string output = "Time since/until...";
+            bool error = false;
+
+            DateTime dtToCompare = DateTime.Now;
+
+            try
+            {
+                dtToCompare = DateTime.Parse(arguments);
+            }
+            catch { error = true; }
+
+            TimeSpan diff;
+
+            if (dtToCompare > DateTime.Now)
+            {
+                output = string.Format("Time until {0}:  ", dtToCompare.ToString(RbData.DateFormat));
+                diff = dtToCompare - DateTime.Now;
+            }
+            else
+            {
+                output = string.Format("Time since {0}:  ", dtToCompare.ToString(RbData.DateFormat));
+                diff = DateTime.Now - dtToCompare;
+            }
+
+            // to save space, displaying units that have a non-zero value
+            int years = 0;
+            while (diff.Days >= 365)
+            {
+                diff = diff.Subtract(new TimeSpan(365, 0, 0, 0));
+                years++;
+            }
+            if (years > 0)
+            {
+                output += string.Format(" {0} years", years);
+            }
+
+            if (diff.Days > 0)
+            {
+                output += string.Format(" {0} days", diff.Days);
+            }
+
+            if (diff.Hours > 0)
+            {
+                output += string.Format(" {0} hours", diff.Hours);
+            }
+
+            if (diff.Minutes > 0)
+            {
+                output += string.Format(" {0} minutes", diff.Minutes);
+            }
+
+            if (error) { output = "Time since/until:   Unable to parse date."; }
+
+            return output;
+        }
+
+        public bool Execute(string arguments)
+        {
+            return false;
+        }
+
+        public string GetIcon()
+        {
+            return string.Empty;
+        }
     }
 }
