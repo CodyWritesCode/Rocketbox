@@ -19,3 +19,6 @@ The default icons included with Rocketbox were produced by third-party artists:
 
 - The calculator icon was designed by Maxim Basinski.
 	https://www.iconfinder.com/vasabii
+	
+- The Internet Archive icon is their logo, and is purported to be in the public domain.
+	https://archive.org/

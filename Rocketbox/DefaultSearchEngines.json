@@ -82,5 +82,17 @@
 		"Url_Prefix": 	"http://steamcommunity.com/search/?text=",
 		"Aliases": 		[ "STEAMC", "SC" ],
 		"Icon":			"steam.png"
+	},
+	{
+		"Name":			"Internet Archive",
+		"Url_Prefix":	"https://archive.org/search.php?query=",
+		"Aliases":		[ "ARCHIVE", "INTARC", "IA" ],
+		"Icon":			"wayback.png"
+	},
+	{
+		"Name":			"Wayback Machine",
+		"Url_Prefix":	"https://web.archive.org/web/*/",
+		"Aliases":		[ "WAYBACK", "WB" ],
+		"Icon":			"wayback.png"
 	}
 ]
