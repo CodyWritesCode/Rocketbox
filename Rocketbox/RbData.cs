@@ -11,6 +11,9 @@ namespace Rocketbox
     internal static class RbData
     {
         private static LiteDatabase _db;
+        private static string _locale;
+
+        private static string[] _allowedLocales = { "ca", "us", "uk" };
 
         // Master list of search engines
         internal static List<RbSearchEngine> SearchEngines;
@@ -30,6 +33,7 @@ namespace Rocketbox
         // Master list of installed packages
         internal static List<string> Packages;
 
+
         /// <summary>
         /// Loads the Rocketbox database
         /// </summary>
@@ -38,7 +42,27 @@ namespace Rocketbox
             // TODO: errors etc
             _db = new LiteDatabase("Rocketbox.db");
 
-            SearchEngines = _db.GetCollection<RbSearchEngine>("searchengines").FindAll().ToList<RbSearchEngine>();
+            if(File.Exists("locale"))
+            {
+                string localeFileText = File.ReadAllText("locale").Trim().ToLower();
+                if(_allowedLocales.Contains(localeFileText))
+                {
+                    _locale = localeFileText;
+                }
+                else
+                {
+                    _locale = "ca";
+                }
+            }
+            else
+            {
+                File.WriteAllText("locale", "ca");
+                _locale = "ca";
+            }
+
+            SearchEngines = _db.GetCollection<RbSearchEngine>("searchengines_" + _locale).FindAll().ToList<RbSearchEngine>();
+            SearchEngines.AddRange(_db.GetCollection<RbSearchEngine>("searchengines").FindAll().ToList<RbSearchEngine>());
+
             ConversionUnits = _db.GetCollection<RbConversionUnit>("conversionunits").FindAll().ToList<RbConversionUnit>();
             TranslateLanguages = _db.GetCollection<RbTranslateLanguage>("languages").FindAll().ToList<RbTranslateLanguage>();
 
@@ -168,7 +192,7 @@ namespace Rocketbox
 
         internal static void DumpInstalledPacks()
         {
-            string dt = DateTime.Now.ToString("d MMM, yyyy - HH:mm:ss");
+            string dt = DateTime.Now.ToString("d MMM yyyy - HH:mm:ss");
 
             List<string> lines = new List<string>();
             lines.Add("Rocketbox - Installed Search Packages");

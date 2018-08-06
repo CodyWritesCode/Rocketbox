@@ -1,26 +1,5 @@
 ﻿[
 	{
-		"Name":			"Google",
-		"Url_Prefix":	"https://www.google.ca/search?q=",
-		"Aliases":		["GOOGLE", "GOOG", "GL"],
-		"Icon":			"google.png",
-		"Collection":	"Default"
-	},
-	{
-		"Name":			"Google (Lucky)",
-		"Url_Prefix":	"http://www.google.ca/search?btnI=I'm+Feeling+Lucky&q=",
-		"Aliases":		["IFL", "LUCKY"],
-		"Icon":			"google.png",
-		"Collection":	"Default"
-	},
-	{
-		"Name":			"Google Maps",
-		"Url_Prefix":	"https://www.google.ca/maps/search/",
-		"Aliases":		["MAPS", "GMAPS"],
-		"Icon":			"gmaps.png",
-		"Collection":	"Default"
-	},
-	{
 		"Name":			"YouTube",
 		"Url_Prefix":	"https://www.youtube.com/results?search_query=",
 		"Aliases":		["YOUTUBE", "YT"],
@@ -67,13 +46,6 @@
 		"Url_Prefix":	"https://www.github.com/search?q=",
 		"Aliases":		["GH", "GITHUB"],
 		"Icon":			"github.png",
-		"Collection":	"Default"
-	},
-	{
-		"Name":			"Amazon",
-		"Url_Prefix":	"https://www.amazon.ca/s/&field-keywords=",
-		"Aliases":		["AMAZON", "AZ"],
-		"Icon":			"amazon.png",
 		"Collection":	"Default"
 	},
 	{

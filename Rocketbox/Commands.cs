@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using NCalc;
+
 namespace Rocketbox
 {
     /// <summary>

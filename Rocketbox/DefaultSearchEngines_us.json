@@ -1,0 +1,30 @@
+﻿[
+	{
+		"Name":			"Google",
+		"Url_Prefix":	"https://www.google.com/search?q=",
+		"Aliases":		["GOOGLE", "GOOG", "GL"],
+		"Icon":			"google.png",
+		"Collection":	"Default"
+	},
+	{
+		"Name":			"Google (Lucky)",
+		"Url_Prefix":	"http://www.google.com/search?btnI=I'm+Feeling+Lucky&q=",
+		"Aliases":		["IFL", "LUCKY"],
+		"Icon":			"google.png",
+		"Collection":	"Default"
+	},
+	{
+		"Name":			"Google Maps",
+		"Url_Prefix":	"https://www.google.com/maps/search/",
+		"Aliases":		["MAPS", "GMAPS"],
+		"Icon":			"gmaps.png",
+		"Collection":	"Default"
+	},
+	{
+		"Name":			"Amazon",
+		"Url_Prefix":	"https://www.amazon.com/s/&field-keywords=",
+		"Aliases":		["AMAZON", "AZ"],
+		"Icon":			"amazon.png",
+		"Collection":	"Default"
+	}
+]

@@ -99,6 +99,9 @@
     </EmbeddedResource>
     <None Include="DefaultConversionUnits.json" />
     <None Include="DefaultLanguages.json" />
+    <None Include="DefaultSearchEngines_uk.json" />
+    <None Include="DefaultSearchEngines_us.json" />
+    <None Include="DefaultSearchEngines_ca.json" />
     <None Include="DefaultSearchEngines.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -107,7 +110,7 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="Rocketbox.db">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
