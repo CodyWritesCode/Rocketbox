@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using NCalc;
-
 namespace Rocketbox
 {
     /// <summary>
@@ -529,6 +528,172 @@ namespace Rocketbox
         public bool Execute(string arguments)
         {
             return false;
+        }
+
+        public string GetIcon()
+        {
+            return string.Empty;
+        }
+    }
+
+    // -------------------------------------------------------
+    // Database modification
+    // -------------------------------------------------------
+
+    internal class ListPackCommand : RbCommand
+    {
+        public ListPackCommand() { }
+        
+        public bool Execute(string arguments)
+        {
+            RbData.DumpInstalledPacks();
+            new ShellCommand("notepad.exe RocketboxPackages.txt").Execute("");
+            return true;
+        }
+
+        public string GetResponse(string arguments)
+        {
+            return "List installed search engine packs...";
+        }
+
+        public string GetIcon()
+        {
+            return string.Empty;
+        }
+    }
+
+    internal class InstallPackCommand : RbCommand
+    {
+        bool goodFile = false;
+
+        bool installAttempted = false;
+        bool installSuccessful = false;
+
+        public InstallPackCommand() { }
+
+        public bool Execute(string arguments)
+        {
+            if(goodFile)
+            {
+                installAttempted = true;
+
+                if(RbData.InstallSearchPack(arguments))
+                {
+                    installSuccessful = true;
+                }
+                else
+                {
+                    installSuccessful = false;
+                }
+            }
+
+            return false;
+        }
+
+        public string GetResponse(string arguments)
+        {
+            string output;
+
+            if(installAttempted)
+            {
+                if(installSuccessful)
+                {
+                    output = "Successfully installed \"" + arguments + "\".";
+                }
+                else
+                {
+                    output = "Was not able to install \"" + arguments + "\". Please verify that the format is correct.";
+                }
+
+                installAttempted = false;
+            }
+            else if(RbData.Packages.Contains(arguments.ToLower()))
+            {
+                output = "Pack \"" + arguments + "\" is already installed.";
+                goodFile = false;
+            }
+            else if(arguments.Trim() == string.Empty || arguments.Contains(" "))
+            {
+                output = "Install search engine pack...";
+                goodFile = false;
+            }
+            else if(arguments.ToLower().Contains("default"))
+            {
+                output = "Cannot add default packs.";
+                goodFile = false;
+            }
+            else if(System.IO.File.Exists(arguments + ".rbx"))
+            {
+                output = "Install search engine pack:  " + arguments;
+                goodFile = true;
+            }
+            else
+            {
+                output = "Search engine pack not found.";
+                goodFile = false;
+            }
+
+            return output;
+        }
+
+        public string GetIcon()
+        {
+            return string.Empty;
+        }
+    }
+
+    internal class UninstallPackCommand : RbCommand
+    {
+        bool packExists = false;
+        bool uninstallSuccessful = false;
+
+        public UninstallPackCommand() { }
+
+        public bool Execute(string arguments)
+        {
+            if(packExists)
+            {
+                RbData.UninstallSearchPack(arguments.Trim().ToLower());
+                uninstallSuccessful = true;
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public string GetResponse(string arguments)
+        {
+            string output;
+
+            if(uninstallSuccessful)
+            {
+                output = "Successfully uninstalled \"" + arguments + "\".";
+                packExists = false;
+            }
+            else if(arguments.Trim() == string.Empty || arguments.Contains(" "))
+            {
+                output = "Uninstall a search engine pack...";
+                packExists = false;
+            }
+            else if(arguments.ToLower().Contains("default"))
+            {
+                output = "Cannot remove a default pack.";
+                packExists = false;
+            }
+            else if(!RbData.Packages.Contains(arguments.Trim().ToLower()))
+            {
+                output = "Pack \"" + arguments + "\" is not installed.";
+                packExists = false;
+            }
+            else
+            {
+                output = "Uninstall search engine pack:  " + arguments;
+                packExists = true;
+            }
+
+            return output;
         }
 
         public string GetIcon()

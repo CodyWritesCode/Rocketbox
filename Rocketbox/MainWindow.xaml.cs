@@ -49,7 +49,7 @@ namespace Rocketbox
 
             // Set an icon if the icon file listed in the command exists
             string icon = Invoker.GetIcon();
-            if(icon.Trim() != string.Empty)
+            if(icon != null && icon.Trim() != string.Empty)
             {
                 if(RbUtility.IconExists(icon))
                 {
@@ -73,6 +73,10 @@ namespace Rocketbox
                     if(Invoker.Execute())
                     {
                         this.Close();
+                    }
+                    else
+                    {
+                        responseText.Text = Invoker.GetResponse();
                     }
                     break;
             }

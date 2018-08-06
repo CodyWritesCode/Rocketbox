@@ -83,6 +83,16 @@ namespace Rocketbox
                 case "UNTIL":
                    _currentCmd = new TimeCompareCommand();
                     break;
+                // ---------------------------------
+                case "PACKS":
+                    _currentCmd = new ListPackCommand();
+                    break;
+                case "INSTALL":
+                    _currentCmd = new InstallPackCommand();
+                    break;
+                case "UNINSTALL":
+                    _currentCmd = new UninstallPackCommand();
+                    break;
             }
         }
 

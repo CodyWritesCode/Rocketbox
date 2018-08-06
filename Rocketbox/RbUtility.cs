@@ -49,5 +49,27 @@ namespace Rocketbox
                 return false;
             }
         }
+
+        /// <summary>
+        /// Checks if an .rbx custom pack record is valid
+        /// </summary>
+        /// <param name="line">The line to validate</param>
+        /// <returns></returns>
+        internal static bool ValidPackLine(string line)
+        {
+            if(!line.Contains(";;"))
+            {
+                return false;
+            }
+
+            string[] fields = line.Split(new string[] { ";;" }, StringSplitOptions.RemoveEmptyEntries);
+
+            if(fields.Length != 3)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
