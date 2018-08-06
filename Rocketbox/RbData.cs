@@ -86,6 +86,7 @@ namespace Rocketbox
         public string Url_Prefix { get; set; }
         public string[] Aliases { get; set; }
         public string Icon { get; set; }
+        public string Collection { get; set; }
     }
 
     /// <summary>

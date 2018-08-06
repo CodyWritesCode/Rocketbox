@@ -3,96 +3,112 @@
 		"Name":			"Google",
 		"Url_Prefix":	"https://www.google.ca/search?q=",
 		"Aliases":		["GOOGLE", "GOOG", "GL"],
-		"Icon":			"google.png"
+		"Icon":			"google.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Google (Lucky)",
 		"Url_Prefix":	"http://www.google.ca/search?btnI=I'm+Feeling+Lucky&q=",
 		"Aliases":		["IFL", "LUCKY"],
-		"Icon":			"google.png"
+		"Icon":			"google.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Google Maps",
 		"Url_Prefix":	"https://www.google.ca/maps/search/",
 		"Aliases":		["MAPS", "GMAPS"],
-		"Icon":			"gmaps.png"
+		"Icon":			"gmaps.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"YouTube",
 		"Url_Prefix":	"https://www.youtube.com/results?search_query=",
 		"Aliases":		["YOUTUBE", "YT"],
-		"Icon":			"youtube.png"
+		"Icon":			"youtube.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Wikipedia",
 		"Url_Prefix":	"https://en.wikipedia.org/wiki/Special:Search?search=",
 		"Aliases":		["WIKIPEDIA", "WP"],
-		"Icon":			"wikipedia.png"
+		"Icon":			"wikipedia.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Reddit",
 		"Url_Prefix":	"https://www.reddit.com/search?restrict_sr=off&sort=relevance&t=all&feature=legacy_search&q=",
 		"Aliases":		["REDDIT"],
-		"Icon":			"reddit.png"
+		"Icon":			"reddit.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Subreddit",
 		"Url_Prefix":	"https://www.reddit.com/r/",
 		"Aliases":		["/R/", "R/", "SUBREDDIT", "SUB"],
-		"Icon":			"reddit.png"
+		"Icon":			"reddit.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Bing",
 		"Url_Prefix":	"https://www.bing.com/search?q=",
 		"Aliases":		["BING"],
-		"Icon":			"bing.png"
+		"Icon":			"bing.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Twitter",
 		"Url_Prefix":	"https://twitter.com/search?f=tweets&vertical=default&q=",
 		"Aliases":		["TWITTER", "TW", "#"],
-		"Icon":			"twitter.png"
+		"Icon":			"twitter.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"GitHub",
 		"Url_Prefix":	"https://www.github.com/search?q=",
 		"Aliases":		["GH", "GITHUB"],
-		"Icon":			"github.png"
+		"Icon":			"github.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Amazon",
 		"Url_Prefix":	"https://www.amazon.ca/s/&field-keywords=",
 		"Aliases":		["AMAZON", "AZ"],
-		"Icon":			"amazon.png"
+		"Icon":			"amazon.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Stack Overflow",
 		"Url_Prefix":	"http://www.stackoverflow.com/search?q=",
 		"Aliases":		["STACKOVERFLOW", "SO"],
-		"Icon":			"stackoverflow.png"
+		"Icon":			"stackoverflow.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Steam (Store)",
 		"Url_Prefix":	"http://store.steampowered.com/search/?snr=1_4_4__12&term=",
 		"Aliases":		["STEAM"],
-		"Icon":			"steam.png"
+		"Icon":			"steam.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Steam (Community)",
 		"Url_Prefix": 	"http://steamcommunity.com/search/?text=",
 		"Aliases": 		[ "STEAMC", "SC" ],
-		"Icon":			"steam.png"
+		"Icon":			"steam.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Internet Archive",
 		"Url_Prefix":	"https://archive.org/search.php?query=",
 		"Aliases":		[ "ARCHIVE", "INTARC", "IA" ],
-		"Icon":			"wayback.png"
+		"Icon":			"wayback.png",
+		"Collection":	"Default"
 	},
 	{
 		"Name":			"Wayback Machine",
 		"Url_Prefix":	"https://web.archive.org/web/*/",
 		"Aliases":		[ "WAYBACK", "WB" ],
-		"Icon":			"wayback.png"
+		"Icon":			"wayback.png",
+		"Collection":	"Default"
 	}
 ]
