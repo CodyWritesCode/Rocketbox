@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using LiteDB;
 
@@ -13,6 +11,7 @@ namespace Rocketbox
         private static LiteDatabase _db;
         private static string _locale;
 
+        // Regional search engine support
         private static string[] _allowedLocales = { "ca", "us", "uk" };
 
         // Master list of search engines
@@ -24,15 +23,14 @@ namespace Rocketbox
         // Master list of Google Translate languages
         internal static List<RbTranslateLanguage> TranslateLanguages;
 
+        // Master list of installed packages
+        internal static List<string> Packages;
+
         // Universal time/date format
         private static string _dateFmt = "dddd, MMMM d, yyyy  ―  h:mm tt";
         internal static string DateFormat { get { return _dateFmt; } }
 
         private static bool isLoaded = false;
-
-        // Master list of installed packages
-        internal static List<string> Packages;
-
 
         /// <summary>
         /// Loads the Rocketbox database
@@ -42,6 +40,8 @@ namespace Rocketbox
             // TODO: errors etc
             _db = new LiteDatabase("Rocketbox.db");
 
+            // Tries to read the locale from a local file
+            // If first run/file is broken, assume Canada
             if(File.Exists("locale"))
             {
                 string localeFileText = File.ReadAllText("locale").Trim().ToLower();
@@ -117,6 +117,11 @@ namespace Rocketbox
         // Database modification
         // ------------------------------------
 
+        /// <summary>
+        /// Attempts to install a search engine pack
+        /// </summary>
+        /// <param name="packName">The name of the .rbx file in the Rocketbox directory</param>
+        /// <returns></returns>
         internal static bool InstallSearchPack(string packName)
         {
             // sanity check
@@ -127,6 +132,11 @@ namespace Rocketbox
 
             string[] lines = File.ReadAllLines(packName + ".rbx");
             List<RbSearchEngine> newItems = new List<RbSearchEngine>();
+
+            /*
+             * .rbx line format:
+             *      Name of Search Engine;;alias,alias,alias;;https://search.prefix/?q=
+             */
 
             foreach(string line in lines)
             {
@@ -167,6 +177,11 @@ namespace Rocketbox
             }
         }
 
+        /// <summary>
+        /// Attempts to remove a search engine pack
+        /// </summary>
+        /// <param name="packName">The name of the pack</param>
+        /// <returns></returns>
         internal static bool UninstallSearchPack(string packName)
         {
             // sanity check
@@ -190,6 +205,9 @@ namespace Rocketbox
             return true;
         }
 
+        /// <summary>
+        /// Writes the list of installed packs to RocketboxPackages.txt
+        /// </summary>
         internal static void DumpInstalledPacks()
         {
             string dt = DateTime.Now.ToString("d MMM yyyy - HH:mm:ss");

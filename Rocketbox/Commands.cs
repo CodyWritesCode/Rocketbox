@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using NCalc;
@@ -494,7 +492,7 @@ namespace Rocketbox
                 diff = DateTime.Now - dtToCompare;
             }
 
-            // to save space, displaying units that have a non-zero value
+            // to save space, only displaying units that have a non-zero value
             int years = 0;
             while (diff.Days >= 365)
             {
@@ -537,10 +535,132 @@ namespace Rocketbox
         }
     }
 
+    /// <summary>
+    /// Command for getting the current Unix timestamp
+    /// </summary>
+    internal class UnixTimeCommand : RbCommand
+    {
+        string unixTimeString;
+
+        public UnixTimeCommand() { }
+
+        public bool Execute(string arguments)
+        {
+            System.Windows.Clipboard.SetText(unixTimeString);
+            return false;
+        }
+
+        public string GetResponse(string arguments)
+        {
+            unixTimeString = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
+            return "Current Unix timestamp:  " + unixTimeString;
+        }
+
+        public string GetIcon()
+        {
+            return string.Empty;
+        }
+    }
+
+    /// <summary>
+    /// Command for converting Unix time into the local date/time
+    /// </summary>
+    internal class FromUnixTimeCommand : RbCommand
+    {
+        long epochValue;
+        string dateString;
+
+        public FromUnixTimeCommand() { }
+
+        public bool Execute(string arguments)
+        {
+            if(dateString != string.Empty)
+            {
+                System.Windows.Clipboard.SetText(dateString);
+            }
+
+            return false;
+        }
+
+        public string GetResponse(string arguments)
+        {
+            dateString = string.Empty;
+
+            if(arguments.Trim() == string.Empty)
+            {
+                return "Convert from Unix time...";
+            }
+
+            if(!long.TryParse(arguments, out epochValue))
+            {
+                return "Unable to parse Unix time.";
+            }
+
+            DateTimeOffset dt = DateTimeOffset.FromUnixTimeSeconds(epochValue);
+            dateString = "Local time:   " + dt.ToLocalTime().ToString(RbData.DateFormat);
+
+            return dateString;
+        }
+
+        public string GetIcon()
+        {
+            return string.Empty;
+        }
+    }
+
+    /// <summary>
+    /// Command to convert a date/time into Unix time
+    /// </summary>
+    internal class ToUnixTimeCommand : RbCommand
+    {
+        DateTime dt;
+        long epochValue;
+        bool goodConversion;
+
+        public bool Execute(string arguments)
+        {
+            if(goodConversion)
+            {
+                System.Windows.Clipboard.SetText(epochValue.ToString());
+            }
+            return false;
+        }
+
+        public string GetResponse(string arguments)
+        {
+            goodConversion = false;
+
+            if(arguments.Trim() == string.Empty)
+            {
+                goodConversion = false;
+                return "Convert to Unix time...";
+            }
+
+            try
+            {
+                dt = DateTime.Parse(arguments);
+            }
+            catch { return "Unable to parse date/time."; }
+
+            epochValue = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+
+            goodConversion = true;
+            return "Unix time:  " + epochValue;
+        }
+
+        public string GetIcon()
+        {
+            return string.Empty;
+        }
+    }
+
     // -------------------------------------------------------
     // Database modification
     // -------------------------------------------------------
 
+    /// <summary>
+    /// Command to dump list of installed search engine packs
+    /// </summary>
     internal class ListPackCommand : RbCommand
     {
         public ListPackCommand() { }
@@ -563,6 +683,9 @@ namespace Rocketbox
         }
     }
 
+    /// <summary>
+    /// Command to install a search engine pack
+    /// </summary>
     internal class InstallPackCommand : RbCommand
     {
         bool goodFile = false;
@@ -643,6 +766,9 @@ namespace Rocketbox
         }
     }
 
+    /// <summary>
+    /// Command to remove a search engine pack
+    /// </summary>
     internal class UninstallPackCommand : RbCommand
     {
         bool packExists = false;

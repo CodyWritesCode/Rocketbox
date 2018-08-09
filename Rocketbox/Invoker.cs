@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Rocketbox
 {
@@ -82,6 +78,15 @@ namespace Rocketbox
                 case "TU":
                 case "UNTIL":
                    _currentCmd = new TimeCompareCommand();
+                    break;
+                case "UT":
+                    _currentCmd = new UnixTimeCommand();
+                    break;
+                case "UFROM":
+                    _currentCmd = new FromUnixTimeCommand();
+                    break;
+                case "UTO":
+                    _currentCmd = new ToUnixTimeCommand();
                     break;
                 // ---------------------------------
                 case "PACKS":
