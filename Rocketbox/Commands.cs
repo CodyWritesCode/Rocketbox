@@ -540,20 +540,20 @@ namespace Rocketbox
     /// </summary>
     internal class UnixTimeCommand : RbCommand
     {
-        string unixTimeString;
+        private string _unixTimeString;
 
         public UnixTimeCommand() { }
 
         public bool Execute(string arguments)
         {
-            System.Windows.Clipboard.SetText(unixTimeString);
+            System.Windows.Clipboard.SetText(_unixTimeString);
             return false;
         }
 
         public string GetResponse(string arguments)
         {
-            unixTimeString = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
-            return "Current Unix timestamp:  " + unixTimeString;
+            _unixTimeString = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
+            return "Current Unix timestamp:  " + _unixTimeString;
         }
 
         public string GetIcon()
@@ -567,16 +567,16 @@ namespace Rocketbox
     /// </summary>
     internal class FromUnixTimeCommand : RbCommand
     {
-        long epochValue;
-        string dateString;
+        private long _epochValue;
+        private string _dateString;
 
         public FromUnixTimeCommand() { }
 
         public bool Execute(string arguments)
         {
-            if(dateString != string.Empty)
+            if(_dateString != string.Empty)
             {
-                System.Windows.Clipboard.SetText(dateString);
+                System.Windows.Clipboard.SetText(_dateString);
             }
 
             return false;
@@ -584,22 +584,22 @@ namespace Rocketbox
 
         public string GetResponse(string arguments)
         {
-            dateString = string.Empty;
+            _dateString = string.Empty;
 
             if(arguments.Trim() == string.Empty)
             {
                 return "Convert from Unix time...";
             }
 
-            if(!long.TryParse(arguments, out epochValue))
+            if(!long.TryParse(arguments, out _epochValue))
             {
                 return "Unable to parse Unix time.";
             }
 
-            DateTimeOffset dt = DateTimeOffset.FromUnixTimeSeconds(epochValue);
-            dateString = "Local time:   " + dt.ToLocalTime().ToString(RbData.DateFormat);
+            DateTimeOffset dt = DateTimeOffset.FromUnixTimeSeconds(_epochValue);
+            _dateString = "Local time:   " + dt.ToLocalTime().ToString(RbData.DateFormat);
 
-            return dateString;
+            return _dateString;
         }
 
         public string GetIcon()
@@ -613,39 +613,39 @@ namespace Rocketbox
     /// </summary>
     internal class ToUnixTimeCommand : RbCommand
     {
-        DateTime dt;
-        long epochValue;
-        bool goodConversion;
+        private DateTime _dt;
+        private long _epochValue;
+        private bool _goodConversion;
 
         public bool Execute(string arguments)
         {
-            if(goodConversion)
+            if(_goodConversion)
             {
-                System.Windows.Clipboard.SetText(epochValue.ToString());
+                System.Windows.Clipboard.SetText(_epochValue.ToString());
             }
             return false;
         }
 
         public string GetResponse(string arguments)
         {
-            goodConversion = false;
+            _goodConversion = false;
 
             if(arguments.Trim() == string.Empty)
             {
-                goodConversion = false;
+                _goodConversion = false;
                 return "Convert to Unix time...";
             }
 
             try
             {
-                dt = DateTime.Parse(arguments);
+                _dt = DateTime.Parse(arguments);
             }
             catch { return "Unable to parse date/time."; }
 
-            epochValue = ((DateTimeOffset)dt).ToUnixTimeSeconds();
+            _epochValue = ((DateTimeOffset)_dt).ToUnixTimeSeconds();
 
-            goodConversion = true;
-            return "Unix time:  " + epochValue;
+            _goodConversion = true;
+            return "Unix time:  " + _epochValue;
         }
 
         public string GetIcon()
@@ -688,26 +688,26 @@ namespace Rocketbox
     /// </summary>
     internal class InstallPackCommand : RbCommand
     {
-        bool goodFile = false;
+        private bool _goodFile = false;
 
-        bool installAttempted = false;
-        bool installSuccessful = false;
+        private bool _installAttempted = false;
+        private bool _installSuccessful = false;
 
         public InstallPackCommand() { }
 
         public bool Execute(string arguments)
         {
-            if(goodFile)
+            if(_goodFile)
             {
-                installAttempted = true;
+                _installAttempted = true;
 
                 if(RbData.InstallSearchPack(arguments))
                 {
-                    installSuccessful = true;
+                    _installSuccessful = true;
                 }
                 else
                 {
-                    installSuccessful = false;
+                    _installSuccessful = false;
                 }
             }
 
@@ -716,11 +716,13 @@ namespace Rocketbox
 
         public string GetResponse(string arguments)
         {
+            _goodFile = false;
+
             string output;
 
-            if(installAttempted)
+            if(_installAttempted)
             {
-                if(installSuccessful)
+                if(_installSuccessful)
                 {
                     output = "Successfully installed \"" + arguments + "\".";
                 }
@@ -729,32 +731,29 @@ namespace Rocketbox
                     output = "Was not able to install \"" + arguments + "\". Please verify that the format is correct.";
                 }
 
-                installAttempted = false;
+                _installAttempted = false;
             }
             else if(RbData.Packages.Contains(arguments.ToLower()))
             {
                 output = "Pack \"" + arguments + "\" is already installed.";
-                goodFile = false;
             }
             else if(arguments.Trim() == string.Empty || arguments.Contains(" "))
             {
                 output = "Install search engine pack...";
-                goodFile = false;
             }
             else if(arguments.ToLower().Contains("default"))
             {
                 output = "Cannot add default packs.";
-                goodFile = false;
             }
             else if(System.IO.File.Exists(arguments + ".rbx"))
             {
                 output = "Install search engine pack:  " + arguments;
-                goodFile = true;
+                _goodFile = true;
             }
             else
             {
                 output = "Search engine pack not found.";
-                goodFile = false;
+                _goodFile = false;
             }
 
             return output;
@@ -771,53 +770,49 @@ namespace Rocketbox
     /// </summary>
     internal class UninstallPackCommand : RbCommand
     {
-        bool packExists = false;
-        bool uninstallSuccessful = false;
+        private bool _packExists = false;
+        private bool _uninstallSuccessful = false;
 
         public UninstallPackCommand() { }
 
         public bool Execute(string arguments)
         {
-            if(packExists)
+            if(_packExists)
             {
                 RbData.UninstallSearchPack(arguments.Trim().ToLower());
-                uninstallSuccessful = true;
-                return false;
+                _uninstallSuccessful = true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public string GetResponse(string arguments)
         {
+            _packExists = false;
+            _uninstallSuccessful = false;
+
             string output;
 
-            if(uninstallSuccessful)
+            if(_uninstallSuccessful)
             {
                 output = "Successfully uninstalled \"" + arguments + "\".";
-                packExists = false;
             }
             else if(arguments.Trim() == string.Empty || arguments.Contains(" "))
             {
                 output = "Uninstall a search engine pack...";
-                packExists = false;
             }
             else if(arguments.ToLower().Contains("default"))
             {
                 output = "Cannot remove a default pack.";
-                packExists = false;
             }
             else if(!RbData.Packages.Contains(arguments.Trim().ToLower()))
             {
                 output = "Pack \"" + arguments + "\" is not installed.";
-                packExists = false;
             }
             else
             {
                 output = "Uninstall search engine pack:  " + arguments;
-                packExists = true;
+                _packExists = true;
             }
 
             return output;
