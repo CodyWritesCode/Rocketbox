@@ -10,6 +10,8 @@ namespace Rocketbox
         private static string _currentText;
         private static RbCommand _currentCmd;
 
+        internal static bool ShutdownNow { get; set; }
+        
         // easy way to access the keyword of the current command
         private static string Keyword
         {
@@ -28,9 +30,12 @@ namespace Rocketbox
             }
         }
 
+
         // should be ran on every update before responding/executing
         internal static void Invoke(string command)
         {
+            ShutdownNow = false;
+
             // default to a shell command
             _currentCmd = new ShellCommand(command);
             _currentText = command;
@@ -89,6 +94,9 @@ namespace Rocketbox
                     _currentCmd = new ToUnixTimeCommand();
                     break;
                 // ---------------------------------
+                case "EXIT":
+                    _currentCmd = new ExitCommand();
+                    break;
                 case "PACKS":
                     _currentCmd = new ListPackCommand();
                     break;

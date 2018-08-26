@@ -655,6 +655,30 @@ namespace Rocketbox
     }
 
     // -------------------------------------------------------
+    // System commands
+    // -------------------------------------------------------
+    internal class ExitCommand : RbCommand
+    {
+        public ExitCommand() { }
+
+        public bool Execute(string arguments)
+        {
+            Invoker.ShutdownNow = true;
+            return true;
+        }
+
+        public string GetResponse(string arguments)
+        {
+            return "Shut down Rocketbox...";
+        }
+
+        public string GetIcon()
+        {
+            return "rocket.ico";
+        }
+    }
+
+    // -------------------------------------------------------
     // Database modification
     // -------------------------------------------------------
 

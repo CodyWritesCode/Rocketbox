@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,6 +26,7 @@ namespace Rocketbox
             _trayIcon.Icon = new Icon(@"icons/rocket.ico");
             _trayIcon.Visible = true;
             _trayIcon.Click += (sender, e) => { this.Show(); };
+            _trayIcon.ShowBalloonTip(5000, "Rocketbox", "Rocketbox is now active. Press Win + ~ to open it.", System.Windows.Forms.ToolTipIcon.Info);
 
             HotkeyManager.Current.AddOrReplace("ShowRb", Key.OemTilde, ModifierKeys.Windows, OnHotkey);
 
@@ -65,6 +67,13 @@ namespace Rocketbox
             }
         }
 
+        private void Reset()
+        {
+            textConsole.Clear();
+            iconView.Source = null;
+            responseText.Text = string.Empty;
+        }
+
         private void KeyPress(object sender, KeyEventArgs e)
         {
             switch(e.Key)
@@ -75,7 +84,15 @@ namespace Rocketbox
                 case Key.Enter:
                     if(Invoker.Execute())
                     {
-                        this.Hide();
+                        if(Invoker.ShutdownNow)
+                        {
+                            this.Close();
+                        }
+                        else
+                        {
+                            Reset();
+                            this.Hide();
+                        }
                     }
                     else
                     {
