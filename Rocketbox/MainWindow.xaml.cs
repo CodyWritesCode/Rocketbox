@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,10 +12,17 @@ namespace Rocketbox
     /// </summary>
     public partial class MainWindow : Window
     {
+        private System.Windows.Forms.NotifyIcon _trayIcon;
+
         public MainWindow()
         {
             InitializeComponent();
             RbData.LoadData();
+
+            _trayIcon = new System.Windows.Forms.NotifyIcon();
+            _trayIcon.Icon = new Icon(@"icons/rocket.ico");
+            _trayIcon.Visible = true;
+            _trayIcon.Click += (sender, e) => { this.Show(); };
 
             responseText.Text = string.Empty;
             textConsole.Text = string.Empty;
