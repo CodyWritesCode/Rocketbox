@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using NHotkey;
+using NHotkey.Wpf;
 
 namespace Rocketbox
 {
@@ -24,6 +26,8 @@ namespace Rocketbox
             _trayIcon.Visible = true;
             _trayIcon.Click += (sender, e) => { this.Show(); };
 
+            HotkeyManager.Current.AddOrReplace("ShowRb", Key.OemTilde, ModifierKeys.Windows, OnHotkey);
+
             responseText.Text = string.Empty;
             textConsole.Text = string.Empty;
 
@@ -33,7 +37,7 @@ namespace Rocketbox
             //  Window will close if unfocused
             //  Other window items will update if a key is pressed
             //  Text box will focus when focused (loaded)
-            this.Deactivated += (sender, e) => this.Close();
+            this.Deactivated += (sender, e) => this.Hide();
             this.KeyDown += KeyPress;
             this.Loaded += (sender, e) => textConsole.Focus();
 
@@ -66,12 +70,12 @@ namespace Rocketbox
             switch(e.Key)
             {
                 case Key.Escape:
-                    this.Close();
+                    this.Hide();
                     break;
                 case Key.Enter:
                     if(Invoker.Execute())
                     {
-                        this.Close();
+                        this.Hide();
                     }
                     else
                     {
@@ -79,6 +83,11 @@ namespace Rocketbox
                     }
                     break;
             }
+        }
+
+        private void OnHotkey(object sender, HotkeyEventArgs e)
+        {
+            this.Show();
         }
     }
 }
