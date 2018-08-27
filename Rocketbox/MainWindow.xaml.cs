@@ -79,6 +79,7 @@ namespace Rocketbox
             switch(e.Key)
             {
                 case Key.Escape:
+                    Reset();
                     this.Hide();
                     break;
                 case Key.Enter:
