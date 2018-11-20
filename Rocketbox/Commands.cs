@@ -596,8 +596,15 @@ namespace Rocketbox
                 return "Unable to parse Unix time.";
             }
 
-            DateTimeOffset dt = DateTimeOffset.FromUnixTimeSeconds(_epochValue);
-            _dateString = "Local time:   " + dt.ToLocalTime().ToString(RbData.DateFormat);
+            try
+            {
+                DateTimeOffset dt = DateTimeOffset.FromUnixTimeSeconds(_epochValue);
+                _dateString = "Local time:   " + dt.ToLocalTime().ToString(RbData.DateFormat);
+            }
+            catch(ArgumentOutOfRangeException)
+            {
+                _dateString = "Unable to parse Unix time.";
+            }
 
             return _dateString;
         }
