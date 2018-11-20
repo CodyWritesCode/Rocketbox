@@ -110,6 +110,7 @@ namespace Rocketbox
         private void OnHotkey(object sender, HotkeyEventArgs e)
         {
             this.Show();
+            this.Activate();
         }
     }
 }
