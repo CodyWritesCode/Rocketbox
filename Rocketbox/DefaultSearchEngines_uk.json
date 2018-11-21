@@ -14,6 +14,13 @@
 		"Collection":	"Default"
 	},
 	{
+		"Name":			"Google Images",
+		"Url_Prefix":	"http://www.google.co.uk/search?tbm=isch&q=",
+		"Aliases":		["IMG", "GIM"],
+		"Icon":			"google.png",
+		"Collection":	"Default"
+	},
+	{
 		"Name":			"Google Maps",
 		"Url_Prefix":	"https://www.google.co.uk/maps/search/",
 		"Aliases":		["MAPS", "GMAPS"],
