@@ -156,27 +156,51 @@
 		"Keywords":		["BYTE", "BYTES", "B"]
 	},
 	{
-		"Name":			"Kilobytes",
+		"Name":			"Old Kilobytes",
 		"Type":			"DATA",
 		"Multiplier":	{ "$numberDecimal": "8192" },
+		"Keywords":		["KIBIBYTE", "KIBIBYTES", "KIB", "KIBYTE", "KIBYTES"]
+	},
+	{
+		"Name":			"Kilobytes",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "8000" },
 		"Keywords":		["KILOBYTE", "KILOBYTES", "KB", "KBYTE", "KBYTES"]
+	},
+		{
+		"Name":			"Old Megabytes",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "8389000" },
+		"Keywords":		["MEBIBYTE", "MEBIBYTES", "MIB", "MIBYTE", "MIBYTES"]
 	},
 	{
 		"Name":			"Megabytes",
 		"Type":			"DATA",
-		"Multiplier":	{ "$numberDecimal": "8388608" },
+		"Multiplier":	{ "$numberDecimal": "8000000" },
 		"Keywords":		["MEGABYTE", "MEGABYTES", "MB", "MBYTE", "MBYTES"]
 	},
 	{
+		"Name":			"Old Gigabytes",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "8590000000" },
+		"Keywords":		["GIBIBYTE", "GIBIBYTES", "GIB", "GIBYTE", "GIBYTES"]
+	},
+		{
 		"Name":			"Gigabytes",
 		"Type":			"DATA",
-		"Multiplier":	{ "$numberDecimal": "8589934592" },
+		"Multiplier":	{ "$numberDecimal": "8000000000" },
 		"Keywords":		["GIGABYTE", "GIGABYTES", "GB", "GBYTE", "GBYTES"]
 	},
 	{
+		"Name":			"Old Terabytes",
+		"Type":			"DATA",
+		"Multiplier":	{ "$numberDecimal": "8796000000000" },
+		"Keywords":		["TEBIBTYE", "TEBIBYTES", "TIB", "TIBYTE", "TIBYTES"]
+	},
+		{
 		"Name":			"Terabytes",
 		"Type":			"DATA",
-		"Multiplier":	{ "$numberDecimal": "8796093022208" },
+		"Multiplier":	{ "$numberDecimal": "8000000000000" },
 		"Keywords":		["TERABYTE", "TERABYTES", "TB", "TBYTE", "TBYTES"]
 	}
 ]

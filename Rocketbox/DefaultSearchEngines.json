@@ -58,7 +58,7 @@
 	{
 		"Name":			"Steam (Store)",
 		"Url_Prefix":	"http://store.steampowered.com/search/?snr=1_4_4__12&term=",
-		"Aliases":		["STEAM"],
+		"Aliases":		["STEAM", "STM"],
 		"Icon":			"steam.png",
 		"Collection":	"Default"
 	},
