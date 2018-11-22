@@ -22,6 +22,10 @@ namespace Rocketbox
             InitializeComponent();
             RbData.LoadData();
 
+            this.Width = System.Windows.SystemParameters.WorkArea.Width - 40;
+            textConsole.Width = this.Width - 20;
+            responseText.Width = this.Width - 64;
+
             _trayIcon = new System.Windows.Forms.NotifyIcon();
             _trayIcon.Icon = new Icon(@"icons/rocket.ico");
             _trayIcon.Visible = true;
@@ -106,6 +110,7 @@ namespace Rocketbox
         private void OnHotkey(object sender, HotkeyEventArgs e)
         {
             this.Show();
+            this.Activate();
         }
     }
 }

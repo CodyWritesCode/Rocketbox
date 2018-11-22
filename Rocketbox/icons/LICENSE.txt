@@ -2,6 +2,7 @@ The default icons included with Rocketbox were produced by third-party artists:
 
 - The rocket icon used for the application was designed by Vectors Market and is licensed under the Flaticon Basic License.
 	https://www.flaticon.com/authors/vectors-market
+	https://profile.flaticon.com/license/free
 
 - The Google, Twitter, YouTube, and GitHub icons were designed by Naveed Hussain. The GitHub icon was modified slightly from its original design.
 	https://www.iconfinder.com/flaticondesign
@@ -23,5 +24,5 @@ The default icons included with Rocketbox were produced by third-party artists:
 - The calculator icon was designed by Maxim Basinski.
 	https://www.iconfinder.com/vasabii
 	
-- The Internet Archive icon is their logo, and is purported to be in the public domain.
+- The Internet Archive icon was created from their logo, which is not bound by copyright.
 	https://archive.org/
