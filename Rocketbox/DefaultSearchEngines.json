@@ -50,21 +50,21 @@
 	},
 	{
 		"Name":			"Stack Overflow",
-		"Url_Prefix":	"http://www.stackoverflow.com/search?q=",
+		"Url_Prefix":	"https://www.stackoverflow.com/search?q=",
 		"Aliases":		["STACKOVERFLOW", "SO"],
 		"Icon":			"stackoverflow.png",
 		"Collection":	"Default"
 	},
 	{
 		"Name":			"Steam (Store)",
-		"Url_Prefix":	"http://store.steampowered.com/search/?snr=1_4_4__12&term=",
+		"Url_Prefix":	"https://store.steampowered.com/search/?snr=1_4_4__12&term=",
 		"Aliases":		["STEAM", "STM"],
 		"Icon":			"steam.png",
 		"Collection":	"Default"
 	},
 	{
 		"Name":			"Steam (Community)",
-		"Url_Prefix": 	"http://steamcommunity.com/search/?text=",
+		"Url_Prefix": 	"https://steamcommunity.com/search/?text=",
 		"Aliases": 		[ "STEAMC", "SC" ],
 		"Icon":			"steam.png",
 		"Collection":	"Default"

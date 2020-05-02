@@ -8,14 +8,14 @@
 	},
 	{
 		"Name":			"Google (Lucky)",
-		"Url_Prefix":	"http://www.google.ca/search?btnI=I'm+Feeling+Lucky&q=",
+		"Url_Prefix":	"https://www.google.ca/search?btnI=Is'm+Feeling+Lucky&q=",
 		"Aliases":		["IFL", "LUCKY"],
 		"Icon":			"google.png",
 		"Collection":	"Default"
 	},
 	{
 		"Name":			"Google Images",
-		"Url_Prefix":	"http://www.google.ca/search?tbm=isch&q=",
+		"Url_Prefix":	"https://www.google.ca/search?tbm=isch&q=",
 		"Aliases":		["IMG", "GIM"],
 		"Icon":			"google.png",
 		"Collection":	"Default"
